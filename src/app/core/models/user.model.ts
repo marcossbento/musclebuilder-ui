@@ -18,7 +18,7 @@ export interface UserRegistration {
 
 export interface LoginRequest {
     email: string;
-    password: string;
+    password?: string;
 }
 
 export interface PasswordUpdate {
