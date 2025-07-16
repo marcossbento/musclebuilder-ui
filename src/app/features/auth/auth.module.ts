@@ -5,12 +5,12 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon'; // Para o ícone de visibilidade da senha
-
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import { ProgressSpinnerModule } from 'primeng/progressspinner'; // Add this
 
 
 
@@ -21,13 +21,14 @@ import { MatIconModule } from '@angular/material/icon'; // Para o ícone de visi
   imports: [
     CommonModule,
     AuthRoutingModule,
-
     ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule
+
+    CardModule,
+    InputTextModule,
+    ButtonModule,
+    PasswordModule,
+    ToastModule,
+    ProgressSpinnerModule
   ]
 })
 export class AuthModule { }

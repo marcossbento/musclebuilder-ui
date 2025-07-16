@@ -4,18 +4,18 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { LoginRequest } from '../../../../core/models/user.model';
 import { finalize } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
+  providers: [MessageService] 
 })
 export class LoginComponent {
   private fb = inject(NonNullableFormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private snackBar = inject(MatSnackBar);
+  private messageService = inject(MessageService);
 
   hidePassword = true;
   isLoading = false;
@@ -48,10 +48,12 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        this.snackBar.open('Email ou senha inválidos', 'Fechar', {
-          duration: 3000,
-          verticalPosition: 'top',
-        })
+        // A chamada de notificação agora é diferente
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Erro no Login', 
+          detail: 'Email ou senha inválidos.' 
+        });
       }
     })
   }
