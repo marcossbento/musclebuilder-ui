@@ -1,25 +1,26 @@
+// ===============================================
+// ESTILOS BASE (MOBILE-FIRST)
+// ===============================================
 .login-page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--surface-dark);
-}
-
-.branding-panel {
-  background-color: var(--background-dark);
-  color: var(--text-light);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 3rem 1rem;
-  text-align: center;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  background-image:
+    linear-gradient(rgba(30, 30, 46, 0.8), rgba(30, 30, 46, 0.8)),
+    url('../../../../../assets/loginBg.png');
+}
 
-  .logo-icon {
-    font-size: 3rem;
-    color: var(--primary-accent);
-    margin-bottom: 0.5rem;
-  }
+.branding-panel {
+  color: var(--text-light);
+  text-align: center;
+  background: none;
+  padding: 0;
 
   h1 {
     font-size: 1.75rem;
@@ -28,33 +29,50 @@
 
   p {
     font-size: 1rem;
-    margin-top: 0.5rem;
     opacity: 0.8;
+    margin-bottom: 2rem;
   }
 }
 
 .form-panel {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 2rem 1rem;
 
   p-card {
     width: 100%;
     max-width: 400px;
-    border: none !important;
-    background: transparent !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px;
+    margin: 0px 8px;
+    background: rgba(42, 42, 62, 0.5) !important;
+    backdrop-filter: blur(5px);
   }
 }
 
+// ===============================================
+// DESKTOP (Telas > 800px)
+// ===============================================
 @media (min-width: 801px) {
   .login-page-container {
     flex-direction: row;
+    padding: 0;
+    background-image: none;
+    align-items: stretch;
   }
 
   .branding-panel {
     flex: 1;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-right: 2px solid var(--border-color);
+    background-size: cover;
+    background-position: center;
+    background-image:
+      linear-gradient(rgba(30, 30, 46, 0.7), rgba(30, 30, 46, 0.7)),
+      url('../../../../../assets/loginBg.png');
 
     h1 {
       font-size: 2.5rem;
@@ -63,5 +81,15 @@
 
   .form-panel {
     flex: 1;
+    background-color: var(--surface-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    p-card {
+      background: var(--surface-dark) !important;
+      border: none !important;
+      backdrop-filter: none;
+    }
   }
 }
