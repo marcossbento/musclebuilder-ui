@@ -15,11 +15,17 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'exercises',
+    loadChildren: () => import('./features/exercises/exercises.module').then(m => m.ExercisesModule),
+    canActivate: [authGuard]
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
   },
-  { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) }
+  { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'exercises', loadChildren: () => import('./features/exercises/exercises.module').then(m => m.ExercisesModule) }
 ];
 
 @NgModule({
