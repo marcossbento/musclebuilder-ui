@@ -13,3 +13,13 @@ export interface Exercise {
     difficultyLevel: DifficultyLevel;
     imageUrl?: string;
 }
+
+export interface ExerciseDTO {
+  id?: number;
+  name: string;
+  description?: string;
+  muscleGroup: string;
+  equipment?: string;
+  difficultyLevel: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
+  imageUrl?: string;
+}
