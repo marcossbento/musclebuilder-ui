@@ -15,4 +15,8 @@ export class ExerciseService {
   getAllExercises(): Observable<ExerciseDTO[]> {
     return this.http.get<ExerciseDTO[]>(this.API_URL);    
   }
+
+  getExerciseById(id: number): Observable<ExerciseDTO> {
+    return this.http.get<ExerciseDTO>(`${this.API_URL}/${id}`);
+  }
 }

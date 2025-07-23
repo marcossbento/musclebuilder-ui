@@ -8,12 +8,18 @@ import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
+import { ExerciseDetailComponent } from './pages/exercise-detail/exercise-detail.component';
+import { CardModule } from 'primeng/card';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
 @NgModule({
   declarations: [
-    ExerciseListComponent
+    ExerciseListComponent,
+    ExerciseDetailComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +27,11 @@ import { ButtonModule } from 'primeng/button';
     DataViewModule,
     TagModule,
     ProgressSpinnerModule,
-    ButtonModule
+    ButtonModule,
+    CardModule,
+    FormsModule,
+    InputTextModule,
+    DropdownModule
   ]
 })
 export class ExercisesModule { }
