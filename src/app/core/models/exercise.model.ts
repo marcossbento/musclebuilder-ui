@@ -1,7 +1,7 @@
 export enum DifficultyLevel {
-    BEGINNER = 'Beginner',
-    INTERMEDIATE = 'Intermediate',
-    ADVANCED = 'Advanced'
+    BEGINNER = 'BEGINNER',
+    INTERMEDIATE = 'INTERMEDIATE',
+    ADVANCED = 'ADVANCED'
 }
 
 export interface Exercise {
@@ -20,6 +20,6 @@ export interface ExerciseDTO {
   description?: string;
   muscleGroup: string;
   equipment?: string;
-  difficultyLevel: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
+  difficultyLevel: DifficultyLevel;
   imageUrl?: string;
 }

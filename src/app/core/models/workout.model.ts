@@ -1,42 +1,50 @@
-import { DifficultyLevel } from "./exercise.model";
+import { DifficultyLevel } from './exercise.model';
 
-export enum WorkoutStatus {
-    ACTIVE = 'Active',
-    INACTIVE = 'Inactive',
-    COMPLETED = 'Completed',
+//models para templates de treino, usados no gerenciamento de treinos(CRUD)
+export interface WorkoutExerciseCreateDTO {
+  exerciseId: number;
+  sets: number;
+  repsPerSet: number;
+  weight?: number;
+  restSeconds?: number;
 }
 
-export interface WorkoutExercise {
-    id?: number;
+export interface WorkoutDTO {
+  id: number;
+  name: string;
+  description?: string;
+  difficultyLevel?: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
+  exercises: {
     exerciseId: number;
     exerciseName?: string;
     sets: number;
     repsPerSet: number;
-    weight?: number;
-    restSeconds?: number;
-    orderPosition?: number;
+  }[];
 }
 
-export interface Workout {
-    id?: number;
-    name: string;
-    description?: string;
-    userId: number;
-    difficultyLevel?: DifficultyLevel;
-    exercises: WorkoutExercise[];
-    createdAt?: string;
-    updatedAt?: string;
+export interface WorkoutCreateDTO {
+  name: string;
+  description?: string;
+  exercises: WorkoutExerciseCreateDTO[];
+}
+
+//models para logs de treino, usados no acompanhamento do treino
+
+export enum WorkoutLogStatus {
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
 }
 
 export interface StartWorkoutRequest {
-    workoutId?: number;
-    workoutName: string;
+  workoutId?: number;
+  workoutName: string;
 }
 
 export interface LogExerciseRequest {
-    exerciseId: number;
-    setsCompleted: number;
-    repsPerSet: string;
-    weightUsed?: number;
-    notes?: string;
+  exerciseId: number;
+  setsCompleted: number;
+  repsPerSet: string;
+  weightUsed?: number;
+  notes?: string;
 }
