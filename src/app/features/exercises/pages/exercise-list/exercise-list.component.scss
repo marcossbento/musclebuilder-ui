@@ -69,10 +69,12 @@
   font-family: 'Press Start 2P', cursive;
   color: var(--primary-accent);
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   flex-grow: 1; 
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 
 .tags-container {

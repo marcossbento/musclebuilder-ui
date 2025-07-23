@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ExerciseService } from '../../../../core/services/exercise.service';
-import { ExerciseDTO } from '../../../../core/models/exercise.model';
+import { DifficultyLevel, ExerciseDTO } from '../../../../core/models/exercise.model';
+import { getSeverity } from '../../../../shared/utils/style.utils';
 
 @Component({
   selector: 'app-exercise-list',
@@ -10,12 +11,14 @@ import { ExerciseDTO } from '../../../../core/models/exercise.model';
 export class ExerciseListComponent implements OnInit {
   private exerciseService = inject(ExerciseService);
 
+  public getSeverity = getSeverity;
+
   private allExercises: ExerciseDTO[] = [];
   isLoading = true;
 
   searchTerm: string = '';
   selectedMuscleGroup: string | null = null;
-  selectedDifficulty: string | null = null;
+  selectedDifficulty: DifficultyLevel | null = null;
 
   muscleGroupOptions: string[] = [];
   difficultyOptions = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
@@ -42,21 +45,5 @@ export class ExerciseListComponent implements OnInit {
 
       return searchMatch && muscleGroupMatch && difficultyMatch;
     });
-  }
-
-  getSeverity(difficultyLevel: string): "success" | "secondary" | "info" | "warning" | "danger" | "contrast" {
-    const severityMap: { [key: string]: "success" | "secondary" | "info" | "warning" | "danger" | "contrast" } = {
-      'Iniciante': 'success',
-      'Intermediário': 'warning', 
-      'Avançado': 'danger',
-      'Beginner': 'success',
-      'Intermediate': 'warning',
-      'Advanced': 'danger',
-      'Fácil': 'success',
-      'Médio': 'warning',
-      'Difícil': 'danger'
-    };
-
-    return severityMap[difficultyLevel] || 'secondary';
   }
 }

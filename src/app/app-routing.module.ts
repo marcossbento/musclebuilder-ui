@@ -20,12 +20,15 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'workouts',
+    loadChildren: () => import('./features/workouts/workouts.module').then(m => m.WorkoutsModule),
+    canActivate: [authGuard]
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
   },
-  { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'exercises', loadChildren: () => import('./features/exercises/exercises.module').then(m => m.ExercisesModule) }
 ];
 
 @NgModule({
