@@ -3,21 +3,22 @@
     <p-progressSpinner></p-progressSpinner>
   </div>
 
-  <p-card *ngIf="!isLoading && exercise" [header]="exercise.name">
-    <div class="detail-grid">
-      <div class="detail-image">
-        <img [src]="exercise.imageUrl || 'assets/placeholder.png'" [alt]="exercise.name">
-      </div>
-      <div class="detail-info">
-        <p>{{ exercise.description }}</p>
-        <div class="tags-container">
-          <p-tag icon="pi pi-tag" [value]="exercise.muscleGroup"></p-tag>
-          <p-tag icon="pi pi-cog" [value]="exercise.equipment"></p-tag>
-          <p-tag icon="pi pi-chart-line" [value]="exercise.difficultyLevel"></p-tag>
-        </div>
-      </div>
+  <div *ngIf="!isLoading && exercise" class="detail-container">
+    <div class="image-panel">
+      <img [src]="exercise.imageUrl || 'assets/placeholder.png'" [alt]="exercise.name">
     </div>
-  </p-card>
 
-  <p-button label="Voltar para a Biblioteca" icon="pi pi-arrow-left" styleClass="p-button-text mt-4" routerLink="/exercises"></p-button>
+    <div class="info-panel">
+      <h1 class="font-logo">{{ exercise.name }}</h1>
+      <p class="description">{{ exercise.description }}</p>
+
+      <div class="tags-container">
+        <p-tag icon="pi pi-tag" [value]="exercise.muscleGroup"></p-tag>
+        <p-tag icon="pi pi-cog" [value]="exercise.equipment || 'Peso Corporal'"></p-tag>
+        <p-tag icon="pi pi-chart-line" [value]="exercise.difficultyLevel" [severity]="getSeverity(exercise.difficultyLevel)"></p-tag>
+      </div>
+
+      <p-button label="Voltar para a Biblioteca" icon="pi pi-arrow-left" styleClass="p-button-text mt-4" routerLink="/exercises"></p-button>
+    </div>
+  </div>
 </div>

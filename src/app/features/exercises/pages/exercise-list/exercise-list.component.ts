@@ -10,20 +10,38 @@ import { ExerciseDTO } from '../../../../core/models/exercise.model';
 export class ExerciseListComponent implements OnInit {
   private exerciseService = inject(ExerciseService);
 
-  exercises: ExerciseDTO[] = [];
+  private allExercises: ExerciseDTO[] = [];
   isLoading = true;
+
+  searchTerm: string = '';
+  selectedMuscleGroup: string | null = null;
+  selectedDifficulty: string | null = null;
+
+  muscleGroupOptions: string[] = [];
+  difficultyOptions = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
 
   ngOnInit(): void {
     this.exerciseService.getAllExercises().subscribe({
       next: (data) => {
-        this.exercises = data;
+        this.allExercises = data;
         this.isLoading = false;
+        this.muscleGroupOptions = [...new Set(data.map(e => e.muscleGroup))];
       },
       error: (err) => {
         console.error('Erro ao buscar exercícios', err);
         this.isLoading = false;
       }
     })
+  }
+
+  get filteredExercises(): ExerciseDTO[] {
+    return this.allExercises.filter(exercise =>{
+      const searchMatch = exercise.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const muscleGroupMatch = this.selectedMuscleGroup ? exercise.muscleGroup === this.selectedMuscleGroup : true;
+      const difficultyMatch = this.selectedDifficulty ? exercise.difficultyLevel === this.selectedDifficulty: true;
+
+      return searchMatch && muscleGroupMatch && difficultyMatch;
+    });
   }
 
   getSeverity(difficultyLevel: string): "success" | "secondary" | "info" | "warning" | "danger" | "contrast" {
