@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ExerciseService } from '../../../../core/services/exercise.service';
 import { DifficultyLevel, ExerciseDTO } from '../../../../core/models/exercise.model';
 import { getSeverity } from '../../../../shared/utils/style.utils';
+import { NavigationService } from '../../../../shared/navigation.service';
 
 @Component({
   selector: 'app-exercise-list',
@@ -10,6 +11,8 @@ import { getSeverity } from '../../../../shared/utils/style.utils';
 })
 export class ExerciseListComponent implements OnInit {
   private exerciseService = inject(ExerciseService);
+
+  public navigationService = inject(NavigationService);
 
   public getSeverity = getSeverity;
 

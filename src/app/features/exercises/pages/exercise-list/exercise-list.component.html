@@ -1,13 +1,35 @@
 <div class="page-container">
+  <p-button
+    label="Voltar"
+    icon="pi pi-arrow-left"
+    (click)="navigationService.goToDashboard()"
+    styleClass="p-button-text p-button-secondary"
+  >
+  </p-button>
+
   <h1 class="font-logo">Biblioteca de Exercícios</h1>
 
   <div class="controls-container">
     <span class="p-input-icon-left">
       <i class="pi pi-search"></i>
-      <input type="text" pInputText placeholder="Buscar por nome..." [(ngModel)]="searchTerm" />
+      <input
+        type="text"
+        pInputText
+        placeholder="Buscar por nome..."
+        [(ngModel)]="searchTerm"
+      />
     </span>
-    <p-dropdown [options]="muscleGroupOptions" [(ngModel)]="selectedMuscleGroup" placeholder="Grupo Muscular"></p-dropdown>
-    <p-dropdown [options]="difficultyOptions" [(ngModel)]="selectedDifficulty" placeholder="Dificuldade" [showClear]="true"></p-dropdown>
+    <p-dropdown
+      [options]="muscleGroupOptions"
+      [(ngModel)]="selectedMuscleGroup"
+      placeholder="Grupo Muscular"
+    ></p-dropdown>
+    <p-dropdown
+      [options]="difficultyOptions"
+      [(ngModel)]="selectedDifficulty"
+      placeholder="Dificuldade"
+      [showClear]="true"
+    ></p-dropdown>
   </div>
 
   <div *ngIf="isLoading" class="spinner-container">
@@ -15,15 +37,28 @@
   </div>
 
   <div *ngIf="!isLoading" class="exercise-grid">
-    <a *ngFor="let exercise of filteredExercises" class="exercise-card" [routerLink]="['/exercises', exercise.id]">
+    <a
+      *ngFor="let exercise of filteredExercises"
+      class="exercise-card"
+      [routerLink]="['/exercises', exercise.id]"
+    >
       <div class="exercise-image-container">
-        <img [src]="exercise.imageUrl || 'assets/placeholder.png'" [alt]="exercise.name" class="exercise-image">
+        <img
+          [src]="exercise.imageUrl || 'assets/placeholder.png'"
+          [alt]="exercise.name"
+          class="exercise-image"
+        />
       </div>
       <div class="exercise-details">
-        <h3 class="exercise-name" [title]="exercise.name">{{ exercise.name }}</h3>
+        <h3 class="exercise-name" [title]="exercise.name">
+          {{ exercise.name }}
+        </h3>
         <div class="tags-container">
           <p-tag [value]="exercise.muscleGroup"></p-tag>
-          <p-tag [value]="exercise.difficultyLevel" [severity]="getSeverity(exercise.difficultyLevel)"></p-tag>
+          <p-tag
+            [value]="exercise.difficultyLevel"
+            [severity]="getSeverity(exercise.difficultyLevel)"
+          ></p-tag>
         </div>
       </div>
     </a>

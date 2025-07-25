@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { WorkoutService } from '../../../../core/services/workout.service';
 import { WorkoutDTO } from '../../../../core/models/workout.model';
+import { NavigationService } from '../../../../shared/navigation.service';
 
 @Component({
   selector: 'app-workout-list',
@@ -9,6 +10,8 @@ import { WorkoutDTO } from '../../../../core/models/workout.model';
 })
 export class WorkoutListComponent implements OnInit{
   private workoutService = inject(WorkoutService);
+
+  public navigationService = inject(NavigationService)
 
   userWorkouts: WorkoutDTO[] = [];
   isLoading = true;
