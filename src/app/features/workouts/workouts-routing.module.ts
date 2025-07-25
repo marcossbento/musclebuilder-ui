@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkoutsComponent } from './workouts.component';
 import { WorkoutBuilderComponent } from './pages/workout-builder/workout-builder.component';
+import { WorkoutListComponent } from './pages/workout-list/workout-list.component';
 
 const routes: Routes = [
   {
      path: '', 
-     component: WorkoutsComponent 
+     component: WorkoutListComponent 
   },
   {
     path: 'new',

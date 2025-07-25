@@ -1,0 +1,86 @@
+.page-container {
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; // Garante que quebre a linha em telas pequenas
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+// Estilos para o estado vazio
+.empty-state {
+  margin-top: 4rem;
+  text-align: center;
+  opacity: 0.7;
+
+  .icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-accent);
+  }
+  h2 {
+    font-family: 'Press Start 2P', cursive;
+  }
+  p {
+    font-size: 1.2rem;
+    max-width: 400px;
+    margin: 1rem auto 2rem auto; // Centraliza e adiciona margens
+  }
+  // Reutiliza o estilo do botão de ação que criamos para o dashboard
+  .action-link {
+    display: inline-block; // Para que o link se comporte como um bloco
+    padding: 1rem 1.5rem;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    background-color: var(--primary-accent);
+    color: var(--background-dark);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+  }
+}
+
+// Estilos para a grade de treinos
+.workouts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.workout-card {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--surface-dark);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  .workout-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--primary-accent);
+    margin: 0 0 1.5rem 0;
+  }
+  .workout-info {
+    flex-grow: 1; // Empurra as ações para o final
+    margin-bottom: 1.5rem;
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+  }
+}

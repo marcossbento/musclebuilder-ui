@@ -1,1 +1,33 @@
-<p>workout-list works!</p>
+<div class="page-container">
+    <div class="header">
+        <h1 class="font-logo">Meus Treinos</h1>
+        <p-button label="Criar novo treino" icon="pi pi-plus" routerLink="/workouts/new"></p-button>
+    </div>
+
+    <div *ngIf="isLoading" class="spinner-container">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <div *ngIf="!isLoading && userWorkouts.length === 0" class="empty-state">
+        <i class="pi pi-book icon"></i>
+        <h2>Nenhum treino encontrado...</h2>
+        <p>Parece que você ainda não criou nenhum plano de treino. Que tal começar agora?</p>
+    </div>
+
+    <div *ngIf="!isLoading && userWorkouts.length > 0" class="workouts-grid">
+        <div *ngFor="let workout of userWorkouts" class="workout-card">
+            <h3 class="workout-name">
+                {{ workout.name }}
+            </h3>
+            <div class="workout-info">
+                <div class="info-item">
+                    <i class="pi pi-list"></i>
+                    <span>{{ workout.exercises.length }} Exercícios</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <p-button label="Iniciar Treino" icon="pi pi-play" styleClass="p-button-success"></p-button>
+            </div>
+        </div>
+    </div>
+</div>

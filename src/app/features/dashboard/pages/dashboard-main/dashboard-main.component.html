@@ -1,15 +1,41 @@
-<div class="dashboard-container">
+<div class="page-container">
   <div class="header">
-    <h1 class="font-logo">Dashboard</h1>
-    <p>Bem-vindo ao seu painel de controle! Pronto para começar?</p>
+    <h1 class="font-logo">Painel Principal</h1>
+    <p>Sua jornada de força começa aqui. O que vamos fazer hoje?</p>
   </div>
 
-  <div class="actions-container">
-    <a routerLink="/exercises" class="action-link">
-      <i class="pi pi-book"></i>
-      <span>Biblioteca de Exercícios</span>
-    </a>
+  <div class="actions-grid">
+    <div class="action-card" routerLink="/workouts">
+      <div class="card-icon">
+        <i class="pi pi-list"></i>
+      </div>
+      <div class="card-text">
+        <h2 class="card-title">Meus Treinos</h2>
+        <p class="card-description">Veja e gerencie seus planos de treino.</p>
+      </div>
     </div>
+
+    <div class="action-card" routerLink="/exercises">
+      <div class="card-icon">
+        <i class="pi pi-book"></i>
+      </div>
+      <div class="card-text">
+        <h2 class="card-title">Biblioteca</h2>
+        <p class="card-description">Explore todos os exercícios disponíveis.</p>
+      </div>
+    </div>
+    
+    <div class="action-card disabled">
+        <div class="card-icon">
+          <i class="pi pi-play"></i>
+        </div>
+        <div class="card-text">
+          <h2 class="card-title">Treino Rápido</h2>
+          <p class="card-description">(Em breve)</p>
+        </div>
+      </div>
+
+  </div>
 
   <div class="logout-container">
     <p-button label="Sair" icon="pi pi-sign-out" (click)="logout()" styleClass="p-button-text p-button-danger"></p-button>
