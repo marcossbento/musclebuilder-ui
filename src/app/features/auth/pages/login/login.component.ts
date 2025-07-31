@@ -35,8 +35,6 @@ export class LoginComponent {
     this.loginForm.disable();
 
     const credentials = this.loginForm.getRawValue() as LoginRequest;
-
-    console.log('Dados do formulário:', this.loginForm.getRawValue());
     
     this.authService.login(credentials).pipe(
       finalize(() => {
@@ -48,7 +46,6 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        // A chamada de notificação agora é diferente
         this.messageService.add({ 
           severity: 'error', 
           summary: 'Erro no Login', 
