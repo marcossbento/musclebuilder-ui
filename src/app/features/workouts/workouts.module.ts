@@ -7,6 +7,12 @@ import { WorkoutBuilderComponent } from './pages/workout-builder/workout-builder
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog'
+import { TableModule } from 'primeng/table'
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -17,9 +23,15 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   imports: [
     CommonModule,
     WorkoutsRoutingModule,
+    ReactiveFormsModule,
     ButtonModule,
     CardModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputTextModule,
+    InputNumberModule,
+    ToastModule,
+    DialogModule,
+    TableModule
   ]
 })
 export class WorkoutsModule { }

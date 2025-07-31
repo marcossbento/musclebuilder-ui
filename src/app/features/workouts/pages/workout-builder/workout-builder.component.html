@@ -1,1 +1,49 @@
-<p>workout-builder works!</p>
+<p-toast></p-toast> <div class="page-container">
+  <div class="header">
+    <h1 class="font-logo">Novo Treino</h1>
+    <div>
+      <p-button label="Salvar Treino" icon="pi pi-save" (click)="saveWorkout()" [loading]="isSaving" [disabled]="workoutForm.invalid"></p-button>
+    </div>
+  </div>
+
+  <form [formGroup]="workoutForm" class="workout-form">
+    <div class="form-section" formArrayName="exercises">
+      <div class="section-header">
+        <h2>Exercícios</h2>
+        <p-button label="Adicionar Exercício" icon="pi pi-plus" styleClass="p-button-outlined" (click)="showExerciseDialog()"></p-button>
+      </div>
+      
+      <div *ngIf="exercisesFormArray.controls.length === 0" class="empty-list">
+        <p>Adicione o primeiro exercício ao seu plano.</p>
+      </div>
+
+      <div *ngFor="let exerciseGroup of exercisesFormArray.controls; let i = index" [formGroupName]="i" class="exercise-row">
+        <div class="exercise-info">
+          <span class="exercise-order">{{ i + 1 }}.</span>
+          <span class="exercise-name">{{ exerciseGroup.value.exerciseName }}</span>
+        </div>
+        <div class="exercise-inputs">
+          <div class="input-group">
+            <label>Séries</label>
+            <p-inputNumber formControlName="sets" [min]="1"></p-inputNumber>
+          </div>
+          <div class="input-group">
+            <label>Reps</label>
+            <p-inputNumber formControlName="repsPerSet" [min]="1"></p-inputNumber>
+          </div>
+          <div class="input-group">
+            <label>Peso (kg)</label>
+            <p-inputNumber formControlName="weight" [min]="0"></p-inputNumber>
+          </div>
+          <div class="input-group">
+            <label>Descanso (s)</label>
+            <p-inputNumber formControlName="restSeconds" [min]="0"></p-inputNumber>
+          </div>
+        </div>
+        <div class="exercise-actions">
+          <p-button icon="pi pi-trash" styleClass="p-button-text p-button-danger" (click)="removeExerciseFromWorkout(i)"></p-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
