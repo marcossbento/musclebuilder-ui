@@ -23,6 +23,22 @@
   </div>
 
   <form [formGroup]="workoutForm" class="workout-form">
+    <div class="form-section">
+      <div class="p-field">
+        <label for="name">Nome do Treino</label>
+        <input id="name" type="text" pInputText formControlName="name" />
+      </div>
+      <div class="p-field">
+        <label for="description">Descrição (Opcional)</label>
+        <textarea
+          id="description"
+          pInputTextarea
+          formControlName="description"
+          rows="3"
+          autoResize="true"
+        ></textarea>
+      </div>
+    </div>
     <div class="form-section" formArrayName="exercises">
       <div class="section-header">
         <h2>Exercícios</h2>

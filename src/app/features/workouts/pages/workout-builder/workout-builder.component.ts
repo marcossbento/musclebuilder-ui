@@ -10,9 +10,10 @@ import { WorkoutCreateDTO } from '../../../../core/models/workout.model';
 @Component({
   selector: 'app-workout-builder',
   templateUrl: './workout-builder.component.html',
-  styleUrl: './workout-builder.component.scss'
+  styleUrl: './workout-builder.component.scss',
+  providers: [MessageService],
 })
-export class WorkoutBuilderComponent implements OnInit{
+export class WorkoutBuilderComponent implements OnInit {
   private fb = inject(FormBuilder);
   private exerciseService = inject(ExerciseService);
   private workoutService = inject(WorkoutService);
@@ -28,12 +29,16 @@ export class WorkoutBuilderComponent implements OnInit{
   isLoadingExercises = true;
 
   ngOnInit(): void {
-      this.workoutForm = this.fb.group({
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        description: [''],
-        exercises: this.fb.array([], [Validators.required])
-      });
+    this.workoutForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      description: [''],
+      exercises: this.fb.array(
+        [],
+        [Validators.minLength(1)]
+      ),
+    });
   }
+
 
   get exercisesFormArray(): FormArray {
     return this.workoutForm.get('exercises') as FormArray;
@@ -49,14 +54,16 @@ export class WorkoutBuilderComponent implements OnInit{
 
   private loadAllExercises(): void {
     this.isLoadingExercises = true;
-    this.exerciseService.getAllExercises().subscribe(data => {
+    this.exerciseService.getAllExercises().subscribe((data) => {
       this.allExercises = data;
       this.isLoadingExercises = false;
-    })
+    });
   }
 
   addExerciseToWorkout(exercise: ExerciseDTO): void {
-    const exerciseExists = this.exercisesFormArray.controls.some(control => control.value.exerciseId === exercise.id);
+    const exerciseExists = this.exercisesFormArray.controls.some(
+      (control) => control.value.exerciseId === exercise.id
+    );
 
     if (!exerciseExists) {
       const exerciseFormGroup = this.fb.group({
@@ -65,9 +72,9 @@ export class WorkoutBuilderComponent implements OnInit{
         sets: [3, [Validators.required, Validators.min(1)]],
         repsPerSet: [10, [Validators.required, Validators.min(1)]],
         weight: [null],
-        restSeconds: [60]
+        restSeconds: [60],
       });
-      this.exercisesFormArray.push(exerciseFormGroup)
+      this.exercisesFormArray.push(exerciseFormGroup);
     }
     this.isExerciseDialogVisible = false;
   }
@@ -77,23 +84,39 @@ export class WorkoutBuilderComponent implements OnInit{
   }
 
   saveWorkout(): void {
+    //  Marca todos os campos para, se houver erros, mostrar eles.
+    this.workoutForm.markAllAsTouched();
+
     if (this.workoutForm.invalid) {
-      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos obrigatórios' });
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Atenção',
+        detail: 'Preencha todos os campos obrigatórios',
+      });
       return;
     }
+
     this.isSaving = true;
 
     const workoutData: WorkoutCreateDTO = this.workoutForm.getRawValue();
 
     this.workoutService.createWorkout(workoutData).subscribe({
       next: (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: `Treino "${response.name}" criado!` });
-        setTimeout(() => this.router.navigate(['/workouts']), 1500); 
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso!',
+          detail: `Treino "${response.name}" criado!`,
+        });
+        setTimeout(() => this.router.navigate(['/workouts']), 1500);
       },
       error: (err) => {
-        this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Não foi possível salvar o treino.'});
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Não foi possível salvar o treino.',
+        });
         this.isSaving = false;
-      }
-    })
+      },
+    });
   }
 }
