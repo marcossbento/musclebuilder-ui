@@ -1,8 +1,24 @@
-<p-toast></p-toast> <div class="page-container">
+<p-toast></p-toast>
+<div class="page-container">
   <div class="header">
-    <h1 class="font-logo">Novo Treino</h1>
-    <div>
-      <p-button label="Salvar Treino" icon="pi pi-save" (click)="saveWorkout()" [loading]="isSaving" [disabled]="workoutForm.invalid"></p-button>
+    <div class="header-left">
+      <p-button
+        label="Voltar"
+        icon="pi pi-arrow-left"
+        styleClass="p-button-text p-button-secondary"
+        routerLink="/workouts"
+      ></p-button>
+      <h1 class="font-logo">Novo Treino</h1>
+    </div>
+
+    <div class="header-right">
+      <p-button
+        label="Salvar Treino"
+        icon="pi pi-save"
+        (click)="saveWorkout()"
+        [loading]="isSaving"
+        [disabled]="workoutForm.invalid"
+      ></p-button>
     </div>
   </div>
 
@@ -10,17 +26,28 @@
     <div class="form-section" formArrayName="exercises">
       <div class="section-header">
         <h2>Exercícios</h2>
-        <p-button label="Adicionar Exercício" icon="pi pi-plus" styleClass="p-button-outlined" (click)="showExerciseDialog()"></p-button>
+        <p-button
+          label="Adicionar Exercício"
+          icon="pi pi-plus"
+          styleClass="p-button-outlined"
+          (click)="showExerciseDialog()"
+        ></p-button>
       </div>
-      
+
       <div *ngIf="exercisesFormArray.controls.length === 0" class="empty-list">
         <p>Adicione o primeiro exercício ao seu plano.</p>
       </div>
 
-      <div *ngFor="let exerciseGroup of exercisesFormArray.controls; let i = index" [formGroupName]="i" class="exercise-row">
+      <div
+        *ngFor="let exerciseGroup of exercisesFormArray.controls; let i = index"
+        [formGroupName]="i"
+        class="exercise-row"
+      >
         <div class="exercise-info">
           <span class="exercise-order">{{ i + 1 }}.</span>
-          <span class="exercise-name">{{ exerciseGroup.value.exerciseName }}</span>
+          <span class="exercise-name">{{
+            exerciseGroup.value.exerciseName
+          }}</span>
         </div>
         <div class="exercise-inputs">
           <div class="input-group">
@@ -29,7 +56,10 @@
           </div>
           <div class="input-group">
             <label>Reps</label>
-            <p-inputNumber formControlName="repsPerSet" [min]="1"></p-inputNumber>
+            <p-inputNumber
+              formControlName="repsPerSet"
+              [min]="1"
+            ></p-inputNumber>
           </div>
           <div class="input-group">
             <label>Peso (kg)</label>
@@ -37,13 +67,47 @@
           </div>
           <div class="input-group">
             <label>Descanso (s)</label>
-            <p-inputNumber formControlName="restSeconds" [min]="0"></p-inputNumber>
+            <p-inputNumber
+              formControlName="restSeconds"
+              [min]="0"
+            ></p-inputNumber>
           </div>
         </div>
         <div class="exercise-actions">
-          <p-button icon="pi pi-trash" styleClass="p-button-text p-button-danger" (click)="removeExerciseFromWorkout(i)"></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-text p-button-danger"
+            (click)="removeExerciseFromWorkout(i)"
+          ></p-button>
         </div>
       </div>
     </div>
   </form>
 </div>
+
+<p-dialog
+  header="Selecione um Exercício"
+  [(visible)]="isExerciseDialogVisible"
+  [modal]="true"
+  [style]="{ width: '90vw', 'max-width': '600px' }"
+>
+  <div *ngIf="isLoadingExercises" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+  <div *ngIf="!isLoadingExercises" class="exercise-select-list">
+    <div *ngFor="let exercise of allExercises" class="exercise-select-row">
+      <div class="exercise-info">
+        <span class="exercise-name">{{ exercise.name }}</span>
+        <span class="muscle-group">{{ exercise.muscleGroup }}</span>
+      </div>
+      <div class="exercise-action">
+        <p-button
+          icon="pi pi-plus"
+          styleClass="p-button-rounded p-button-success"
+          (click)="addExerciseToWorkout(exercise)"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
