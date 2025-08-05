@@ -36,11 +36,6 @@ export enum WorkoutLogStatus {
   CANCELLED = 'CANCELLED',
 }
 
-export interface StartWorkoutRequest {
-  workoutId?: number;
-  workoutName: string;
-}
-
 export interface LogExerciseRequest {
   exerciseId: number;
   setsCompleted: number;
