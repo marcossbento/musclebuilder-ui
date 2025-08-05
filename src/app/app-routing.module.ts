@@ -29,6 +29,7 @@ const routes: Routes = [
     redirectTo: 'auth',
     pathMatch: 'full'
   },
+  { path: 'session', loadChildren: () => import('./features/workout-session/workout-session.module').then(m => m.WorkoutSessionModule) },
 ];
 
 @NgModule({
