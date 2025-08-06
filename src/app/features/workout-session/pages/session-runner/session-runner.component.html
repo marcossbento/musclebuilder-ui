@@ -1,1 +1,29 @@
-<p>session-runner works!</p>
+<div class="page-container" *ngIf="workoutTemplate$ | async as workout">
+  <div *ngIf="isLoading" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div class="session-header">
+      <h1 class="font-logo">{{ workout.name }}</h1>
+      <p>Exercício {{ currentExerciseIndex + 1 }} de {{ workout.exercises.length }}</p>
+    </div>
+
+    <div class="current-exercise-container" *ngIf="workout.exercises[currentExerciseIndex] as currentExercise">
+        
+        <div class="exercise-info">
+            <h2>{{ currentExercise.exerciseName }}</h2>
+            <p-tag [value]="currentExercise.repsPerSet + ' Reps / ' + currentExercise.sets + ' Séries'"></p-tag>
+        </div>
+
+        <div class="sets-logger">
+            <p>TODO:Formulário para registrar as séries</p>
+        </div>
+    </div>
+
+    <div class="navigation-controls">
+      <p-button label="Anterior" icon="pi pi-arrow-left" (click)="previousExercise()" [disabled]="currentExerciseIndex === 0"></p-button>
+      <p-button label="Próximo" icon="pi pi-arrow-right" iconPos="right" (click)="nextExercise()"></p-button>
+    </div>
+  </div>
+</div>
