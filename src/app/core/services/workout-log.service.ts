@@ -14,7 +14,9 @@ export class WorkoutLogService {
     return this.http.post<WorkoutLogResponse>(`${this.API_URL}/start`, request);
   }
 
-  // TODO: métodos para registrar exercícios e completar treino
+  getWorkoutLogById(logId: number): Observable<WorkoutLogResponse> {
+    return this.http.get<WorkoutLogResponse>(`${this.API_URL}/${logId}`);
+  }
 
   constructor() { }
 }

@@ -14,17 +14,6 @@ export interface ExerciseLogDetails {
     notes?: string;
 }
 
-export interface WorkoutLogResponse {
-    id: number;
-    workoutName: string;
-    status: WorkoutLogStatus;
-    startedAt: string;
-    completedAt?: string;
-    durationMinutes?: number;
-    totalVolume?: number;
-    exerciseLogs: ExerciseLogDetails[];
-}
-
 export interface ProgressSummary {
     totalWorkouts: number;
     totalVolume: number;
