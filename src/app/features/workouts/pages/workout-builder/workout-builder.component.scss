@@ -40,6 +40,13 @@
     font-size: 0.9rem;
     opacity: 0.8;
   }
+
+  textarea {
+    background-color: var(--surface-dark);
+    color: var(--text-light);
+    border: 2px solid;
+    border-radius: 4px !important;
+  }
 }
 
 .section-header {
@@ -77,17 +84,17 @@
 
 .exercise-info {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 1rem;
 
   .exercise-order {
     font-family: 'Press Start 2P', cursive;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--primary-accent);
   }
 
   .exercise-name {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 700;
   }
 }
@@ -163,11 +170,13 @@
 
       .p-dialog-title {
         font-family: 'Press Start 2P', cursive;
+        font-size: 1rem;
       }
     }
 
     .p-dialog-content {
       background: var(--background-dark);
+      color: var(--text-light);
       padding: 0; // Removemos o padding padrão para ter controle total
     }
   }
