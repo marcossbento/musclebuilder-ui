@@ -1,0 +1,76 @@
+.page-container {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.session-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    color: var(--primary-accent);
+  }
+}
+
+.current-exercise-container {
+  background-color: var(--surface-dark);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.exercise-info {
+  text-align: center;
+  margin-bottom: 2rem;
+  h2 {
+    font-family: 'Press Start 2P', cursive;
+  }
+}
+
+.sets-logger {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sets-header, .set-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.sets-header {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.set-number {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+}
+
+.set-actions {
+  margin-top: 1rem;
+}
+
+.navigation-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+}
+
+::ng-deep .p-inputnumber .p-inputtext {
+  width: 100%;
+}
