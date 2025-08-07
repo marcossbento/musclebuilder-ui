@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { StartWorkoutRequest, WorkoutLogResponse } from '../models/workout-log.model';
 import { Observable } from 'rxjs';
+import { LogExerciseRequest } from '../models/workout.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class WorkoutLogService {
 
   getWorkoutLogById(logId: number): Observable<WorkoutLogResponse> {
     return this.http.get<WorkoutLogResponse>(`${this.API_URL}/${logId}`);
+  }
+
+  logExercise(logId: number, request: LogExerciseRequest): Observable<WorkoutLogResponse> {
+    return this.http.post<WorkoutLogResponse>(`${this.API_URL}/${logId}/exercises`, request);
   }
 
   constructor() { }
