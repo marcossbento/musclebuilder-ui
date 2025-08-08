@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkoutService } from '../../../../core/services/workout.service';
 import { WorkoutLogService } from '../../../../core/services/workout-log.service';
 import { Observable, switchMap } from 'rxjs';
@@ -19,13 +19,14 @@ import { MessageService } from 'primeng/api';
 })
 export class SessionRunnerComponent implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private workoutService = inject(WorkoutService);
   private workoutLogService = inject(WorkoutLogService);
   private fb = inject(FormBuilder);
   private messageService = inject(MessageService);
 
   isLoading = true;
-  isLoggingExercise = false;
+  isSaving = false;
   workout!: WorkoutDTO;
   activeWorkoutLog!: WorkoutLogResponse;
 
@@ -76,7 +77,7 @@ export class SessionRunnerComponent implements OnInit {
       for (let i = 0; i < currentExercise.sets; i++) {
         const setFormGroup = this.fb.group({
           reps: [currentExercise.repsPerSet, Validators.required],
-          weight: [null, Validators.required]
+          weight: [null, Validators.required],
         });
         (newForm.get('sets') as FormArray).push(setFormGroup);
       }
@@ -84,11 +85,6 @@ export class SessionRunnerComponent implements OnInit {
       this.currentExerciseForm = newForm;
       this.exerciseForms[exerciseId] = newForm;
     }
-
-    this.currentExerciseForm = this.fb.group({
-      exerciseId: [currentExercise.exerciseId],
-      sets: this.fb.array([]),
-    });
   }
 
   addSet(reps: number | null = null): void {
@@ -114,7 +110,7 @@ export class SessionRunnerComponent implements OnInit {
       return;
     }
 
-    this.isLoggingExercise = true;
+    this.isSaving = true;
     const formValue = this.currentExerciseForm.value;
     const request: LogExerciseRequest = {
       exerciseId: formValue.exerciseId,
@@ -131,7 +127,7 @@ export class SessionRunnerComponent implements OnInit {
             this.currentExerciseIndex++;
             this.setupFormForCurrentExercise();
           }
-          this.isLoggingExercise = false;
+          this.isSaving = false;
         },
         error: (err) => {
           this.messageService.add({
@@ -139,7 +135,7 @@ export class SessionRunnerComponent implements OnInit {
             summary: 'Erro',
             detail: 'Não foi possível salvar o progresso.',
           });
-          this.isLoggingExercise = false;
+          this.isSaving = false;
         },
       });
   }
@@ -149,5 +145,29 @@ export class SessionRunnerComponent implements OnInit {
       this.currentExerciseIndex--;
       this.setupFormForCurrentExercise();
     }
+  }
+
+  onCompleteWorkout(): void {
+    this.isSaving = true;
+    this.workoutLogService.completeWorkout(this.activeWorkoutLog.id).subscribe({
+      next: (completedLog) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Parabéns!',
+          detail: 'Treino finalizado com sucesso!',
+        });
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1500);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Não foi possível finalizar o treino.',
+        });
+        this.isSaving = false;
+      },
+    });
   }
 }
