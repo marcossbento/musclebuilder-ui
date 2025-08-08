@@ -23,5 +23,9 @@ export class WorkoutLogService {
     return this.http.post<WorkoutLogResponse>(`${this.API_URL}/${logId}/exercises`, request);
   }
 
+  completeWorkout(logId: number): Observable<WorkoutLogResponse> {
+    return this.http.post<WorkoutLogResponse>(`${this.API_URL}/${logId}/complete`, {});
+  }
+
   constructor() { }
 }
