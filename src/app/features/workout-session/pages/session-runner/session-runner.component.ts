@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkoutService } from '../../../../core/services/workout.service';
 import { WorkoutLogService } from '../../../../core/services/workout-log.service';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, throwError } from 'rxjs';
 import {
   LogExerciseRequest,
   WorkoutDTO,
@@ -99,15 +99,11 @@ export class SessionRunnerComponent implements OnInit {
     this.setsFormArray.removeAt(index);
   }
 
-  // Lógica de navegação
-  onNextExercise(): void {
+  //Método que salva o progresso do exercício atual
+  private logCurrentExercise(): Observable<WorkoutLogResponse> {
     if (this.currentExerciseForm.invalid) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Atenção',
-        detail: 'Preencha  os dados de todas as séries para avançar',
-      });
-      return;
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha os dados de todas as séries' })
+      return throwError(() => new Error('Formulário inválido'))
     }
 
     this.isSaving = true;
@@ -119,25 +115,23 @@ export class SessionRunnerComponent implements OnInit {
       setsCompleted: formValue.sets.length,
     };
 
-    this.workoutLogService
-      .logExercise(this.activeWorkoutLog.id, request)
-      .subscribe({
-        next: () => {
-          if (this.currentExerciseIndex < this.workout.exercises.length - 1) {
-            this.currentExerciseIndex++;
-            this.setupFormForCurrentExercise();
-          }
-          this.isSaving = false;
-        },
-        error: (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Erro',
-            detail: 'Não foi possível salvar o progresso.',
-          });
-          this.isSaving = false;
-        },
-      });
+    return this.workoutLogService.logExercise(this.activeWorkoutLog.id, request);
+  }
+
+  // Lógica de navegação
+  onNextExercise(): void {
+    this.logCurrentExercise().subscribe({
+      next: () => {
+        if (this.currentExerciseIndex < this.workout.exercises.length -1) {
+          this.currentExerciseIndex++;
+          this.setupFormForCurrentExercise();
+        }
+        this.isSaving = false;
+      },
+      error: (err) => {
+        this.isSaving = false;
+      }
+    });
   }
 
   onPreviousExercise(): void {
@@ -148,26 +142,19 @@ export class SessionRunnerComponent implements OnInit {
   }
 
   onCompleteWorkout(): void {
-    this.isSaving = true;
-    this.workoutLogService.completeWorkout(this.activeWorkoutLog.id).subscribe({
+    this.logCurrentExercise().pipe(
+      switchMap(() => this.workoutLogService.completeWorkout(this.activeWorkoutLog.id))
+    ).subscribe({
       next: (completedLog) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Parabéns!',
-          detail: 'Treino finalizado com sucesso!',
-        });
+        this.messageService.add({ severity: 'success', summary: 'Parabéns', detail:'Treino finalizado com sucesso!' });
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/session', completedLog.id, 'summary']);
         }, 1500);
       },
       error: (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro',
-          detail: 'Não foi possível finalizar o treino.',
-        });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível finalizar o treino' });
         this.isSaving = false;
-      },
-    });
+      }
+    })
   }
 }
