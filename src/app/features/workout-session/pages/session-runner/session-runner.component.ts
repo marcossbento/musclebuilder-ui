@@ -77,7 +77,7 @@ export class SessionRunnerComponent implements OnInit {
       for (let i = 0; i < currentExercise.sets; i++) {
         const setFormGroup = this.fb.group({
           reps: [currentExercise.repsPerSet, Validators.required],
-          weight: [null, Validators.required],
+          weight: [currentExercise.weight, Validators.required],
         });
         (newForm.get('sets') as FormArray).push(setFormGroup);
       }
@@ -87,10 +87,19 @@ export class SessionRunnerComponent implements OnInit {
     }
   }
 
-  addSet(reps: number | null = null): void {
+  addSet(): void {
+    let lastReps = null;
+    let lastWeight = null;
+
+    if (this.setsFormArray.length > 0) {
+      const lastSet = this.setsFormArray.at(this.setsFormArray.length - 1);
+      lastReps = lastSet.value.reps;
+      lastWeight = lastSet.value.weight;
+    }
+
     const setFormGroup = this.fb.group({
-      reps: [null, Validators.required],
-      weight: [null, Validators.required],
+      reps: [lastReps, Validators.required],
+      weight: [lastWeight, Validators.required],
     });
     this.setsFormArray.push(setFormGroup);
   }

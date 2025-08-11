@@ -71,6 +71,22 @@
   padding-top: 5rem;
 }
 
-::ng-deep .p-inputnumber .p-inputtext {
-  width: 100%;
+::ng-deep {
+  .set-row .p-inputnumber {
+    width: 100%;
+  }
+
+  .set-row .p-inputnumber .p-inputtext {
+    width: 100%;
+    text-align: center;
+  }
+
+  .set-row .p-inputnumber-button {
+    width: 1.5rem;
+    padding: 0.5rem 0; 
+  }
+
+  .set-row .p-inputnumber-button .p-button-icon {
+    font-size: 0.8rem;
+  }
 }

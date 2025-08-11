@@ -19,6 +19,7 @@ export interface WorkoutDTO {
     exerciseName?: string;
     sets: number;
     repsPerSet: number;
+    weight: number;
   }[];
 }
 

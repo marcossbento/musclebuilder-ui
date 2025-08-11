@@ -34,8 +34,24 @@
           class="set-row"
         >
           <span class="set-number">{{ i + 1 }}</span>
-          <p-inputNumber formControlName="weight" [min]="0"></p-inputNumber>
-          <p-inputNumber formControlName="reps" [min]="0"></p-inputNumber>
+          <p-inputNumber
+            formControlName="weight"
+            [min]="0"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            [step]="2.5"
+            decrementButtonIcon="pi pi-minus"
+            incrementButtonIcon="pi pi-plus"
+          ></p-inputNumber>
+          <p-inputNumber
+            formControlName="reps"
+            [min]="0"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            [step]="1"
+            decrementButtonIcon="pi pi-minus"
+            incrementButtonIcon="pi pi-plus"
+          ></p-inputNumber>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-text p-button-danger"
