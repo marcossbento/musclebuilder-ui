@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div *ngIf="isLoading" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+  <div *ngIf="!isLoading && workoutLog" class="summary-content">
+    <div class="header">
+      <h1 class="font-logo">Treino Concluído!</h1>
+      <p>Bom trabalho! Confira o resumo do seu desempenho.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value">{{ workoutLog.durationMinutes || 0 }}</span>
+        <span class="stat-label">Minutos</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ workoutLog.totalVolume || 0 }}</span>
+        <span class="stat-label">Kg Levantados</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ workoutLog.exerciseLogs.length }}</span>
+        <span class="stat-label">Exercícios</span>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="exercise-list">
+      <h2 class="font-logo">Detalhes</h2>
+      <div *ngFor="let log of workoutLog.exerciseLogs" class="exercise-summary-row">
+        <span class="exercise-name">{{ log.exerciseName }}</span>
+        <div class="performance-details">
+          <div class="detail-item">
+            <span class="detail-label">Meta</span>
+            <span class="detail-value">{{ log.targetSets }}x{{ log.targetReps }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Realizado</span>
+            <span class="detail-value">{{ log.setsCompleted }}x [{{ log.repsPerSet }}]</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Peso</span>
+            <span class="detail-value">{{ log.weightUsed || 0 }} kg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <p-button label="Voltar para o Dashboard" icon="pi pi-th-large" routerLink="/dashboard"></p-button>
+    </div>
+  </div>
+</div>

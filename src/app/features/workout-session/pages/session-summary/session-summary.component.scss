@@ -1,0 +1,118 @@
+.page-container {
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  h1 {
+    color: var(--success); // Cor de sucesso para o título!
+    font-size: 2.5rem;
+  }
+  p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background-color: var(--surface-dark);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  .stat-value {
+    display: block;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: var(--primary-accent);
+  }
+  .stat-label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+  }
+}
+
+.exercise-list {
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.exercise-summary-row {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-dark);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  
+  .exercise-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .performance-details {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .detail-item {
+    text-align: center;
+    .detail-label {
+      display: block;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    .detail-value {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+  }
+}
+
+.footer-actions {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+// Media Query para Desktop
+@media (min-width: 769px) {
+  .page-container {
+    padding: 3rem;
+  }
+
+  .exercise-summary-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .exercise-name {
+      text-align: left;
+      margin-bottom: 0;
+      flex: 1.5; // Dá mais espaço para o nome
+    }
+
+    .performance-details {
+      flex: 2; // Dá mais espaço para os detalhes
+    }
+  }
+}
