@@ -82,6 +82,41 @@
   text-align: center;
 }
 
+.progress-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 2.5rem auto; // Adiciona margem inferior
+}
+
+.stat-card {
+  background-color: var(--surface-dark);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+
+  .stat-value {
+    display: block;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: var(--primary-accent);
+    margin-bottom: 0.5rem;
+    // Garante que o texto não quebre
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+}
+
 // DESKTOP (Telas > 768px)
 @media (min-width: 769px) {
   .page-container {

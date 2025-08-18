@@ -4,6 +4,37 @@
     <p>Sua jornada de força começa aqui. O que vamos fazer hoje?</p>
   </div>
 
+  <div *ngIf="!isLoading && progressSummary" class="progress-widgets">
+    <div class="stat-card">
+      <span class="stat-value">{{ progressSummary.totalWorkouts }}</span>
+      <span class="stat-label">Treinos Concluídos</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{
+        progressSummary.totalVolume | number : "1.0-0"
+      }}</span>
+      <span class="stat-label">Kg Levantados</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{
+        progressSummary.mostFrequentExercise || "N/A"
+      }}</span>
+      <span class="stat-label">Exercício Favorito</span>
+    </div>
+  </div>
+
+  <p-divider *ngIf="!isLoading"></p-divider>
+
+  <div
+    *ngIf="!isLoading && exerciseProgressChartConfig"
+    class="chart-container"
+  >
+    <h2 class="font-logo">Progresso: Supino Reto</h2>
+    <app-progress-chart
+      [chartConfig]="exerciseProgressChartConfig"
+    ></app-progress-chart>
+  </div>
+
   <div class="actions-grid">
     <div class="action-card" routerLink="/workouts">
       <div class="card-icon">
@@ -24,20 +55,24 @@
         <p class="card-description">Explore todos os exercícios disponíveis.</p>
       </div>
     </div>
-    
-    <div class="action-card disabled">
-        <div class="card-icon">
-          <i class="pi pi-play"></i>
-        </div>
-        <div class="card-text">
-          <h2 class="card-title">Treino Rápido</h2>
-          <p class="card-description">(Em breve)</p>
-        </div>
-      </div>
 
+    <div class="action-card disabled">
+      <div class="card-icon">
+        <i class="pi pi-play"></i>
+      </div>
+      <div class="card-text">
+        <h2 class="card-title">Treino Rápido</h2>
+        <p class="card-description">(Em breve)</p>
+      </div>
+    </div>
   </div>
 
   <div class="logout-container">
-    <p-button label="Sair" icon="pi pi-sign-out" (click)="logout()" styleClass="p-button-text p-button-danger"></p-button>
+    <p-button
+      label="Sair"
+      icon="pi pi-sign-out"
+      (click)="logout()"
+      styleClass="p-button-text p-button-danger"
+    ></p-button>
   </div>
 </div>
