@@ -14,13 +14,13 @@ export interface ExerciseLogDetails {
     notes?: string;
 }
 
-export interface ProgressSummary {
+export interface ProgressSummaryDTO {
     totalWorkouts: number;
     totalVolume: number;
-    mostFrequentExercise?: string;
+    mostFrequentExercise: string;
 }
 
-export interface ExerciseProgress {
+export interface ExerciseProgressDTO {
     date: string;
     maxWeight: number;
     volume: number;
