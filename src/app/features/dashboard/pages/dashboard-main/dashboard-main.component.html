@@ -1,38 +1,30 @@
 <div class="page-container">
+
+  <div class="logout-container">
+    <p-button
+      label="Sair"
+      icon="pi pi-sign-out"
+      (click)="logout()"
+      styleClass="p-button-text p-button-danger"
+    ></p-button>
+  </div>
+
   <div class="header">
-    <h1 class="font-logo">Painel Principal</h1>
+    <div class="header-title">
+      <svg
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="dashboard-icon"
+      >
+        <path
+          d="M3 3h8v10H3V3zm2 2v6h4V5H5zm8-2h8v6h-8V3zm2 2v2h4V5h-4zm-2 6h8v10h-8V11zm2 2v6h4v-6h-4zM3 15h8v6H3v-6zm2 2v2h4v-2H5z"
+          fill="currentColor"
+        />
+      </svg>
+      <h1 class="font-logo">Painel Principal</h1>
+    </div>
     <p>Sua jornada de força começa aqui. O que vamos fazer hoje?</p>
-  </div>
-
-  <div *ngIf="!isLoading && progressSummary" class="progress-widgets">
-    <div class="stat-card">
-      <span class="stat-value">{{ progressSummary.totalWorkouts }}</span>
-      <span class="stat-label">Treinos Concluídos</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value">{{
-        progressSummary.totalVolume | number : "1.0-0"
-      }}</span>
-      <span class="stat-label">Kg Levantados</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value">{{
-        progressSummary.mostFrequentExercise || "N/A"
-      }}</span>
-      <span class="stat-label">Exercício Favorito</span>
-    </div>
-  </div>
-
-  <p-divider *ngIf="!isLoading"></p-divider>
-
-  <div
-    *ngIf="!isLoading && exerciseProgressChartConfig"
-    class="chart-container"
-  >
-    <h2 class="font-logo">Progresso: Supino Reto</h2>
-    <app-progress-chart
-      [chartConfig]="exerciseProgressChartConfig"
-    ></app-progress-chart>
   </div>
 
   <div class="actions-grid">
@@ -67,12 +59,44 @@
     </div>
   </div>
 
-  <div class="logout-container">
-    <p-button
-      label="Sair"
-      icon="pi pi-sign-out"
-      (click)="logout()"
-      styleClass="p-button-text p-button-danger"
-    ></p-button>
+  <div *ngIf="!isLoading && progressSummary" class="progress-widgets">
+    <h1>Estatísticas</h1>
+    <div class="stat-card">
+      <span class="stat-value">{{ progressSummary.totalWorkouts }}</span>
+      <span class="stat-label">Treinos Concluídos</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{
+        progressSummary.totalVolume | number : "1.0-0"
+      }}</span>
+      <span class="stat-label">Kg Levantados</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{
+        progressSummary.mostFrequentExercise || "N/A"
+      }}</span>
+      <span class="stat-label">Exercício Favorito</span>
+    </div>
   </div>
+
+  <p-divider *ngIf="!isLoading"></p-divider>
+
+  <div
+    *ngIf="!isLoading && exerciseProgressChartConfig"
+    class="chart-container"
+  >
+    <div class="chart-container-title">
+      <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chart-icon">
+        <path
+          d="M7 7h4v4H7V7zm-2 6v-2h2v2H5zm0 0v4H1v-4h4zm8 0h-2v-2h2v2zm4 0h-4v4h4v-4zm2-2v2h-2v-2h2zm0 0h4V7h-4v4z"
+          fill="currentColor"
+        />
+      </svg>
+      <h2 class="font-logo">Progresso: Supino Reto</h2>
+    </div>
+    <app-progress-chart
+      [chartConfig]="exerciseProgressChartConfig"
+    ></app-progress-chart>
+  </div>
+
 </div>
