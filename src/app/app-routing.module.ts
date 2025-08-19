@@ -43,6 +43,14 @@ const routes: Routes = [
       canActivate: [authGuard],
   },
   {
+    path: 'profile',
+    loadChildren: () => 
+      import('./features/profile/profile.module').then(
+        (m) => m.ProfileModule
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full',

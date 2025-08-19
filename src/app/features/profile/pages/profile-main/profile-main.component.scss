@@ -1,0 +1,68 @@
+:host {
+  display: block;
+}
+
+.page-container {
+  padding: 2rem;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.header {
+  text-align: center;
+  margin: 1.5rem 0 2.5rem 0;
+
+  p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.user-details-card .detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0.25rem;
+  border-bottom: 2px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .detail-label {
+    opacity: 0.7;
+    font-weight: 700;
+  }
+
+  .detail-value {
+    font-weight: 700;
+    color: var(--primary-accent);
+  }
+}
+
+.achievements-card .empty-state,
+.history-section .empty-state {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.6;
+
+  .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.history-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
