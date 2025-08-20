@@ -29,15 +29,19 @@
         </div>
         <div class="detail-item">
           <span class="detail-label">Altura</span>
-          <span class="detail-value">{{ user.height || 'Não informado' }} cm</span>
+          <span class="detail-value"
+            >{{ user.height || "Não informado" }} cm</span
+          >
         </div>
         <div class="detail-item">
           <span class="detail-label">Peso</span>
-          <span class="detail-value">{{ user.weight || 'Não informado' }} kg</span>
+          <span class="detail-value"
+            >{{ user.weight || "Não informado" }} kg</span
+          >
         </div>
         <div class="detail-item">
           <span class="detail-label">Objetivo</span>
-          <span class="detail-value">{{ user.goal || 'Não informado' }}</span>
+          <span class="detail-value">{{ user.goal || "Não informado" }}</span>
         </div>
       </p-card>
 
@@ -53,10 +57,49 @@
 
     <div class="history-section">
       <h2 class="font-logo">Histórico de Treinos</h2>
-      <div class="empty-state">
-        <i class="pi pi-history icon"></i>
-        <p>O seu histórico de treinos concluídos será listado aqui.</p>
+
+      <div
+        *ngIf="workoutHistory.length > 0; else noHistory"
+        class="history-list"
+      >
+        <a
+          *ngFor="let log of workoutHistory"
+          [routerLink]="['/session', log.id, 'summary']"
+          class="history-card"
+        >
+          <div class="card-header">
+            <i class="pi pi-calendar-check icon"></i>
+            <span class="date">{{
+              log.completedAt | date : "dd/MM/yyyy"
+            }}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="workout-name">{{ log.workoutName }}</h3>
+            <div class="stats">
+              <span
+                ><i class="pi pi-clock"></i>
+                {{ log.durationMinutes || 0 }} min</span
+              >
+              <span
+                ><i class="pi pi-bolt"></i> {{ log.totalVolume || 0 }} kg</span
+              >
+            </div>
+          </div>
+          <div class="card-footer">
+            <span>Ver Detalhes <i class="pi pi-arrow-right"></i></span>
+          </div>
+        </a>
       </div>
+
+      <ng-template #noHistory>
+        <div class="empty-state">
+          <i class="pi pi-history icon"></i>
+          <p>
+            Você ainda não concluiu nenhum treino. O seu histórico aparecerá
+            aqui!
+          </p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
