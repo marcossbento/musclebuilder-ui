@@ -35,80 +35,57 @@
     <p>Sua jornada de força começa aqui. O que vamos fazer hoje?</p>
   </div>
 
+   <div *ngIf="!isLoading">
+    <div *ngIf="nextWorkout; else noWorkouts" class="cta-card" [routerLink]="['/session', nextWorkout.id]">
+      <div class="cta-text">
+        <span>Próximo Treino</span>
+        <h2>{{ nextWorkout.name }}</h2>
+      </div>
+      <div class="cta-action">
+        <span>Começar</span>
+        <i class="pi pi-arrow-right"></i>
+      </div>
+    </div>
+    <ng-template #noWorkouts>
+      <div class="cta-card-empty" routerLink="/workouts/new">
+        <h2>Nenhum treino encontrado</h2>
+        <p>Crie o seu primeiro plano de treino para começar!</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <p-divider></p-divider>
+
   <div class="actions-grid">
     <div class="action-card" routerLink="/workouts">
-      <div class="card-icon">
-        <i class="pi pi-list"></i>
-      </div>
+      <div class="card-icon"><i class="pi pi-list"></i></div>
       <div class="card-text">
         <h2 class="card-title">Meus Treinos</h2>
-        <p class="card-description">Veja e gerencie seus planos de treino.</p>
+        <p class="card-description">Veja e gerencie seus planos.</p>
       </div>
     </div>
-
     <div class="action-card" routerLink="/exercises">
-      <div class="card-icon">
-        <i class="pi pi-book"></i>
-      </div>
+      <div class="card-icon"><i class="pi pi-book"></i></div>
       <div class="card-text">
         <h2 class="card-title">Biblioteca</h2>
-        <p class="card-description">Explore todos os exercícios disponíveis.</p>
-      </div>
-    </div>
-
-    <div class="action-card disabled">
-      <div class="card-icon">
-        <i class="pi pi-play"></i>
-      </div>
-      <div class="card-text">
-        <h2 class="card-title">Treino Rápido</h2>
-        <p class="card-description">(Em breve)</p>
+        <p class="card-description">Explore todos os exercícios.</p>
       </div>
     </div>
   </div>
 
-  <h1>Estatísticas</h1>
   <div *ngIf="!isLoading && progressSummary" class="progress-widgets">
+    <h2 class="font-logo">Estatísticas Gerais</h2>
     <div class="stat-card">
       <span class="stat-value">{{ progressSummary.totalWorkouts }}</span>
       <span class="stat-label">Treinos Concluídos</span>
     </div>
     <div class="stat-card">
-      <span class="stat-value">{{
-        progressSummary.totalVolume | number : "1.0-0"
-      }}</span>
+      <span class="stat-value">{{ progressSummary.totalVolume | number : "1.0-0" }}</span>
       <span class="stat-label">Kg Levantados</span>
     </div>
     <div class="stat-card">
-      <span class="stat-value">{{
-        progressSummary.mostFrequentExercise || "N/A"
-      }}</span>
+      <span class="stat-value">{{ progressSummary.mostFrequentExercise || "N/A" }}</span>
       <span class="stat-label">Exercício Favorito</span>
     </div>
-  </div>
-
-  <p-divider *ngIf="!isLoading"></p-divider>
-
-  <div
-    *ngIf="!isLoading && exerciseProgressChartConfig"
-    class="chart-container"
-  >
-    <div class="chart-container-title">
-      <svg
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        class="chart-icon"
-      >
-        <path
-          d="M7 7h4v4H7V7zm-2 6v-2h2v2H5zm0 0v4H1v-4h4zm8 0h-2v-2h2v2zm4 0h-4v4h4v-4zm2-2v2h-2v-2h2zm0 0h4V7h-4v4z"
-          fill="currentColor"
-        />
-      </svg>
-      <h2 class="font-logo">Progresso: Supino Reto</h2>
-    </div>
-    <app-progress-chart
-      [chartConfig]="exerciseProgressChartConfig"
-    ></app-progress-chart>
   </div>
 </div>
