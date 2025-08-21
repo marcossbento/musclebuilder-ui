@@ -96,6 +96,14 @@
   text-align: start;
 }
 
+.header-actions {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 0.5rem; 
+  margin-bottom: 1rem;
+}
+
 .progress-widgets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

@@ -29,24 +29,33 @@
   margin-bottom: 2rem;
 }
 
-.user-details-card .detail-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 0.25rem;
-  border-bottom: 2px solid var(--border-color);
-
-  &:last-child {
-    border-bottom: none;
+:host ::ng-deep .user-details-card {
+  
+  .p-card-content {
+    padding: 0;
   }
 
-  .detail-label {
-    opacity: 0.7;
-    font-weight: 700;
-  }
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem; 
+    border-bottom: 2px solid var(--border-color);
+    gap: 8px;
 
-  .detail-value {
-    font-weight: 700;
-    color: var(--primary-accent);
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      opacity: 0.7;
+      font-weight: 700;
+    }
+
+    .detail-value {
+      font-weight: 700;
+      color: var(--primary-accent);
+      text-align: right;
+    }
   }
 }
 
