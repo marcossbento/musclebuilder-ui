@@ -4,7 +4,7 @@ export interface StartWorkoutRequest {
 }
 
 export interface ExerciseLogResponse {
-  exerciseId: number;
+  id: number;
   exerciseName: string;
   repsPerSet: string;
   weightUsed?: number;

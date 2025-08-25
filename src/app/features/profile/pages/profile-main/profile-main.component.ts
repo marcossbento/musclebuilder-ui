@@ -90,8 +90,8 @@ export class ProfileMainComponent implements OnInit{
     const uniqueExercises = new Map<number, string>();
 
     allExerciseLogs.forEach(log => {
-      if (log.exerciseId && !uniqueExercises.has(log.exerciseId)) {
-        uniqueExercises.set(log.exerciseId, log.exerciseName);
+      if (log.id && !uniqueExercises.has(log.id)) {
+        uniqueExercises.set(log.id, log.exerciseName);
       }
     });
 
