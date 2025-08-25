@@ -7,6 +7,10 @@ import { CardModule } from "primeng/card";
 import { DividerModule } from "primeng/divider";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { ButtonModule } from "primeng/button";
+import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from "primeng/dropdown";
+import { SharedModule } from "../../shared/shared.module";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { ButtonModule } from "primeng/button";
     CardModule,
     DividerModule,
     ProgressSpinnerModule,
-    ButtonModule
+    ButtonModule,
+    TooltipModule,
+    FormsModule,
+    DropdownModule,
+    SharedModule
 ]
 })
 export class ProfileModule { }

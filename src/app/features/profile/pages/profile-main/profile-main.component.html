@@ -46,10 +46,38 @@
       </p-card>
 
       <p-card header="Minhas Conquistas" styleClass="achievements-card">
-        <div class="empty-state">
-          <i class="pi pi-shield icon"></i>
-          <p>As suas conquistas aparecerão aqui em breve!</p>
+        <div
+          *ngIf="achievements.length > 0; else noAchievements"
+          class="achievements-list"
+        >
+          <div
+            *ngFor="let ach of achievements"
+            class="achievement-item"
+            [pTooltip]="ach.description"
+            tooltipPosition="top"
+          >
+            <img
+              [src]="ach.badgeUrl || 'assets/placeholder.png'"
+              alt="Distintivo"
+              class="badge-icon"
+            />
+            <div class="achievement-text">
+              <span class="achievement-name">{{ ach.name }}</span>
+              <span class="achievement-date"
+                >Conquistado em: {{ ach.earnedAt | date : "dd/MM/yyyy" }}</span
+              >
+            </div>
+          </div>
         </div>
+
+        <ng-template #noAchievements>
+          <div class="empty-state">
+            <i class="pi pi-shield icon"></i>
+            <p>
+              Continue a treinar para desbloquear as suas primeiras conquistas!
+            </p>
+          </div>
+        </ng-template>
       </p-card>
     </div>
 
@@ -101,5 +129,31 @@
         </div>
       </ng-template>
     </div>
+
+    <p-divider></p-divider>
+
+<div class="progress-chart-section">
+  <div class="chart-header">
+    <h2 class="font-logo">Análise de Exercício</h2>
+    
+    <p-dropdown 
+      [options]="exerciseOptionsForChart" 
+      [(ngModel)]="selectedExerciseIdForChart" 
+      (onChange)="onChartExerciseChange()"
+      placeholder="Selecione um exercício para analisar"
+      optionLabel="exerciseName"
+      optionValue="exerciseId">
+    </p-dropdown>
+  </div>
+
+  <div *ngIf="exerciseProgressChartConfig" class="chart-container">
+    <app-progress-chart [chartConfig]="exerciseProgressChartConfig"></app-progress-chart>
+  </div>
+
+  <div *ngIf="!exerciseProgressChartConfig && !isLoading" class="empty-state">
+      <i class="pi pi-chart-line icon"></i>
+      <p>Selecione um exercício para ver o seu progresso.</p>
+  </div>
+</div>
   </div>
 </div>

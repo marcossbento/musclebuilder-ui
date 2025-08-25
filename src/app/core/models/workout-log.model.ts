@@ -4,6 +4,7 @@ export interface StartWorkoutRequest {
 }
 
 export interface ExerciseLogResponse {
+  exerciseId: number;
   exerciseName: string;
   repsPerSet: string;
   weightUsed?: number;
@@ -18,7 +19,7 @@ export interface WorkoutLogResponse {
   status: 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
   startedAt: string;
   completedAt?: string;
-  durationMinutes?: number; // Propriedade adicionada
-  totalVolume?: number; // Propriedade adicionada
-  exerciseLogs: ExerciseLogResponse[]; // Propriedade adicionada
+  durationMinutes?: number;
+  totalVolume?: number; 
+  exerciseLogs: ExerciseLogResponse[]; 
 }
