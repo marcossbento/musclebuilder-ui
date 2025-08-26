@@ -111,8 +111,12 @@ export class SessionRunnerComponent implements OnInit {
   //Método que salva o progresso do exercício atual
   private logCurrentExercise(): Observable<WorkoutLogResponse> {
     if (this.currentExerciseForm.invalid) {
-      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha os dados de todas as séries' })
-      return throwError(() => new Error('Formulário inválido'))
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Atenção',
+        detail: 'Preencha os dados de todas as séries',
+      });
+      return throwError(() => new Error('Formulário inválido'));
     }
 
     this.isSaving = true;
@@ -124,14 +128,17 @@ export class SessionRunnerComponent implements OnInit {
       setsCompleted: formValue.sets.length,
     };
 
-    return this.workoutLogService.logExercise(this.activeWorkoutLog.id, request);
+    return this.workoutLogService.logExercise(
+      this.activeWorkoutLog.id,
+      request
+    );
   }
 
   // Lógica de navegação
   onNextExercise(): void {
     this.logCurrentExercise().subscribe({
       next: () => {
-        if (this.currentExerciseIndex < this.workout.exercises.length -1) {
+        if (this.currentExerciseIndex < this.workout.exercises.length - 1) {
           this.currentExerciseIndex++;
           this.setupFormForCurrentExercise();
         }
@@ -139,7 +146,7 @@ export class SessionRunnerComponent implements OnInit {
       },
       error: (err) => {
         this.isSaving = false;
-      }
+      },
     });
   }
 
@@ -151,19 +158,42 @@ export class SessionRunnerComponent implements OnInit {
   }
 
   onCompleteWorkout(): void {
-    this.logCurrentExercise().pipe(
-      switchMap(() => this.workoutLogService.completeWorkout(this.activeWorkoutLog.id))
-    ).subscribe({
-      next: (completedLog) => {
-        this.messageService.add({ severity: 'success', summary: 'Parabéns', detail:'Treino finalizado com sucesso!' });
-        setTimeout(() => {
-          this.router.navigate(['/session', completedLog.id, 'summary']);
-        }, 1500);
-      },
-      error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível finalizar o treino' });
-        this.isSaving = false;
-      }
-    })
+    this.logCurrentExercise()
+      .pipe(
+        switchMap(() =>
+          this.workoutLogService.completeWorkout(this.activeWorkoutLog.id)
+        )
+      )
+      .subscribe({
+        next: (response) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Parabéns!',
+            detail: 'Treino finalizado com sucesso!',
+          });
+
+          if (response.newlyAwardedAchievements && response.newlyAwardedAchievements.length > 0) {
+            setTimeout(() => {
+              response.newlyAwardedAchievements.forEach(ach => {
+                this.messageService.add({
+                  severity: 'info',
+                  summary: 'Conquista desbloqueada',
+                  detail: ach.name,
+                  icon: 'pi pi-star-fill',
+                  life: 4000
+                });
+              });
+            }, 700);
+          }
+
+          setTimeout(() => {
+            this.router.navigate(['/session', response.workoutLog.id, 'summary']);
+          }, 1500);
+        },
+        error: (err) => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível finalizar o treino' })
+          this.isSaving = false;
+        }
+      });
   }
 }

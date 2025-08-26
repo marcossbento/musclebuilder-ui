@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { StartWorkoutRequest, WorkoutLogResponse } from '../models/workout-log.model';
+import { CompleteWorkoutResponse, StartWorkoutRequest, WorkoutLogResponse } from '../models/workout-log.model';
 import { Observable } from 'rxjs';
 import { LogExerciseRequest } from '../models/workout.model';
 
@@ -23,8 +23,8 @@ export class WorkoutLogService {
     return this.http.post<WorkoutLogResponse>(`${this.API_URL}/${logId}/exercises`, request);
   }
 
-  completeWorkout(logId: number): Observable<WorkoutLogResponse> {
-    return this.http.post<WorkoutLogResponse>(`${this.API_URL}/${logId}/complete`, {});
+  completeWorkout(logId: number): Observable<CompleteWorkoutResponse> {
+    return this.http.post<CompleteWorkoutResponse>(`${this.API_URL}/${logId}/complete`, {});
   }
 
   getWorkoutHistory(): Observable<WorkoutLogResponse[]> {

@@ -1,3 +1,5 @@
+import { Achievement } from "./achievements.model";
+
 export interface StartWorkoutRequest {
   workoutId: number;
   workoutName: string;
@@ -22,4 +24,9 @@ export interface WorkoutLogResponse {
   durationMinutes?: number;
   totalVolume?: number; 
   exerciseLogs: ExerciseLogResponse[]; 
+}
+
+export interface CompleteWorkoutResponse {
+  workoutLog: WorkoutLogResponse;
+  newlyAwardedAchievements: Achievement[];
 }
