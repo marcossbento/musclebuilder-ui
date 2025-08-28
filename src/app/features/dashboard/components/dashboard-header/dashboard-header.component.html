@@ -1,0 +1,12 @@
+<div class="header-container" *ngIf="user && stats">
+  <div class="greeting">
+    <h1>Olá, {{ user.name }}!</h1>
+    <p class="level-badge">Nível {{ stats.level }}</p>
+  </div>
+  <div class="xp-bar-container">
+    <div class="xp-bar">
+      <div class="xp-bar-fill" [style.width.%]="xpPercentage"></div>
+    </div>
+    <div class="xp-label">{{ stats.xp }} / {{ stats.xpToNextLevel }} XP</div>
+  </div>
+</div>

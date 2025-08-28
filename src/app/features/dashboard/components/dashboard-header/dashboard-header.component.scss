@@ -1,0 +1,40 @@
+.header-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.level-badge {
+  display: inline-block;
+  background-color: var(--primary-accent);
+  color: var(--background-dark);
+  padding: 0.5rem 1rem;
+  font-family: 'Press Start 2P', cursive;
+  border-radius: 4px;
+  border: 2px solid var(--border-color);
+}
+
+.xp-bar-container {
+  background-color: var(--surface-dark);
+  border: 2px solid var(--border-color);
+  padding: 5px;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.xp-bar {
+  height: 25px;
+  background-color: var(--background-dark);
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: var(--primary-accent);
+  box-shadow: 0 0 8px var(--primary-accent);
+  transition: width 0.8s ease-out;
+}
+
+.xp-label {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
