@@ -16,7 +16,13 @@ export class DashboardHeaderComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
       if (changes['stats'] && this.stats) {
         setTimeout(() => {
-          this.xpPercentage = (this.stats!.xp / this.stats!.xpToNextLevel) * 100;
+
+          if (this.stats && this.stats.xpToNextLevel > 0) {
+            const progress = Math.min(this.stats.xp, this.stats.xpToNextLevel);
+            this.xpPercentage = (progress / this.stats.xpToNextLevel) * 100;
+          } else {
+            this.xpPercentage = 0
+          }
         }, 100);
       }
   }
