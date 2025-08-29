@@ -1,0 +1,52 @@
+.mission-card {
+  background-color: var(--surface-dark);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.mission-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--primary-accent);
+  margin-bottom: 0.5rem;
+
+  i {
+    font-size: 1.5rem;
+  }
+  h3 {
+    margin: 0;
+  }
+}
+
+.mission-title {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.mission-progress-bar-container {
+  border: 2px solid var(--border-color);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.mission-progress-bar {
+  height: 15px;
+  background-color: var(--background-dark);
+}
+
+.mission-progress-bar-fill {
+  height: 100%;
+  background: var(--success); /* Usando a cor de sucesso para progresso */
+  transition: width 0.5s ease-in-out;
+}
+
+.mission-progress-label {
+  margin-top: 0.5rem;
+  font-weight: 700;
+}

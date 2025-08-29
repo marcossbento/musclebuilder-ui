@@ -1,0 +1,13 @@
+<div class="mission-card" *ngIf="mission">
+  <div class="mission-header">
+    <i class="pi pi-flag-fill"></i>
+    <h3 class="font-logo">Missão Semanal</h3>
+  </div>
+  <p class="mission-title">{{ mission.title }}</p>
+  <div class="mission-progress-bar-container">
+    <div class="mission-progress-bar">
+      <div class="mission-progress-bar-fill" [style.width.%]="missionProgressPercentage"></div>
+    </div>
+  </div>
+  <div class="mission-progress-label">{{ mission.progress }} / {{ mission.goal }}</div>
+</div>
