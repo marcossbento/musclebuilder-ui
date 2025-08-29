@@ -1,91 +1,24 @@
 <div class="page-container">
-  <div class="header-actions">
-    <p-button
-      icon="pi pi-user"
-      styleClass="p-button-rounded p-button-secondary p-button-text"
-      routerLink="/profile"
-      pTooltip="Meu Perfil"
-      tooltipPosition="bottom"
-    >
-    </p-button>
+  <ng-container *ngIf="(dashboardStats$ | async) as stats">
+    <div *ngIf="!isLoading" class="dashboard-content">
 
-    <p-button
-      label="Sair"
-      icon="pi pi-sign-out"
-      (click)="logout()"
-      styleClass="p-button-text p-button-danger"
-    ></p-button>
-  </div>
+      <app-dashboard-header
+        [user]="user$ | async"
+        [stats]="stats">
+      </app-dashboard-header>
 
-  <div class="header">
-    <div class="header-title">
-      <svg
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        class="dashboard-icon"
-      >
-        <path
-          d="M3 3h8v10H3V3zm2 2v6h4V5H5zm8-2h8v6h-8V3zm2 2v2h4V5h-4zm-2 6h8v10h-8V11zm2 2v6h4v-6h-4zM3 15h8v6H3v-6zm2 2v2h4v-2H5z"
-          fill="currentColor"
-        />
-      </svg>
-      <h1 class="font-logo">Painel Principal</h1>
-    </div>
-    <p>Sua jornada de força começa aqui. O que vamos fazer hoje?</p>
-  </div>
+      <app-dashboard-next-workout [workout]="nextWorkout$ | async"></app-dashboard-next-workout>
 
-   <div *ngIf="!isLoading">
-    <div *ngIf="nextWorkout; else noWorkouts" class="cta-card" [routerLink]="['/session', nextWorkout.id]">
-      <div class="cta-text">
-        <span>Próximo Treino</span>
-        <h2>{{ nextWorkout.name }}</h2>
-      </div>
-      <div class="cta-action">
-        <span>Começar</span>
-        <i class="pi pi-arrow-right"></i>
-      </div>
-    </div>
-    <ng-template #noWorkouts>
-      <div class="cta-card-empty" routerLink="/workouts/new">
-        <h2>Nenhum treino encontrado</h2>
-        <p>Crie o seu primeiro plano de treino para começar!</p>
-      </div>
-    </ng-template>
-  </div>
+      <app-dashboard-mission [mission]="weeklyMission$ | async"></app-dashboard-mission>
 
-  <p-divider></p-divider>
+      <p-divider styleClass="my-5"></p-divider>
 
-  <div class="actions-grid">
-    <div class="action-card" routerLink="/workouts">
-      <div class="card-icon"><i class="pi pi-list"></i></div>
-      <div class="card-text">
-        <h2 class="card-title">Meus Treinos</h2>
-        <p class="card-description">Veja e gerencie seus planos.</p>
-      </div>
-    </div>
-    <div class="action-card" routerLink="/exercises">
-      <div class="card-icon"><i class="pi pi-book"></i></div>
-      <div class="card-text">
-        <h2 class="card-title">Biblioteca</h2>
-        <p class="card-description">Explore todos os exercícios.</p>
-      </div>
-    </div>
-  </div>
+      <app-dashboard-stats [stats]="stats"></app-dashboard-stats>
 
-  <div *ngIf="!isLoading && progressSummary" class="progress-widgets">
-    <h2 class="font-logo">Estatísticas Gerais</h2>
-    <div class="stat-card">
-      <span class="stat-value">{{ progressSummary.totalWorkouts }}</span>
-      <span class="stat-label">Treinos Concluídos</span>
     </div>
-    <div class="stat-card">
-      <span class="stat-value">{{ progressSummary.totalVolume | number : "1.0-0" }}</span>
-      <span class="stat-label">Kg Levantados</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value">{{ progressSummary.mostFrequentExercise || "N/A" }}</span>
-      <span class="stat-label">Exercício Favorito</span>
-    </div>
+  </ng-container>
+
+  <div *ngIf="isLoading" class="spinner-container">
+    <p-progressSpinner></p-progressSpinner>
   </div>
 </div>

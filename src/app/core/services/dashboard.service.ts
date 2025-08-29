@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { WorkoutDTO } from '../models/workout.model';
-import { User } from '../models/user.model';
 
+// --- INTERFACES FRONT ---
 export interface GamifiedDashboardStats {
   level: number;
   xp: number;
   xpToNextLevel: number;
   completedWorkouts: number;
-  totalWeightLifted: number;
+  totalVolume: number;
   streak: number;
   achievements: number;
 }
@@ -18,6 +18,33 @@ export interface WeeklyMission {
   title: string;
   progress: number;
   goal: number;
+}
+
+// --- Interfaces que representam a RESPOSTA DA API ---
+interface ApiUserLevel {
+  level: number;
+  currentXp: number;
+  xpForNextLevel: number;
+}
+
+interface ApiStats {
+  totalWorkouts: number;
+  totalVolume: number;
+  streak: number;
+}
+
+interface ApiWeeklyMission {
+  title: string;
+  completed: number;
+  goal: number;
+}
+
+// Interface principal da resposta da API
+export interface DashboardApiResponse {
+  userLevel: ApiUserLevel;
+  stats: ApiStats;
+  weeklyMission: ApiWeeklyMission;
+  recommendedWorkout: WorkoutDTO;
 }
 
 @Injectable({
@@ -39,11 +66,27 @@ export class DashboardService {
   constructor() { }
 
   public loadDashboardData(): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}`).pipe(
+    return this.http.get<DashboardApiResponse>(`${this.API_URL}`).pipe(
       tap(data => {
-        this.dashboardStatsSubject.next(data.stats);
-        this.nextWorkoutSubject.next(data.nextWorkout);
-        this.weeklyMissionSubject.next(data.weeklyMission);
+        const frontendStats: GamifiedDashboardStats = {
+          level: data.userLevel.level,
+          xp: data.userLevel.currentXp,
+          xpToNextLevel: data.userLevel.xpForNextLevel,
+          completedWorkouts: data.stats.totalWorkouts,
+          totalVolume: data.stats.totalVolume,
+          streak: data.stats.streak,
+          achievements: 0
+        };
+
+        const frontendMission: WeeklyMission = {
+          title: data.weeklyMission.title,
+          progress: data.weeklyMission.completed,
+          goal: data.weeklyMission.goal
+        }
+
+        this.dashboardStatsSubject.next(frontendStats);
+        this.nextWorkoutSubject.next(data.recommendedWorkout);
+        this.weeklyMissionSubject.next(frontendMission);
       })
     );
   }
