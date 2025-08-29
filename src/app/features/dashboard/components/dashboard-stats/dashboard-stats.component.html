@@ -1,0 +1,18 @@
+<div class="stats-grid" *ngIf="stats">
+  <div class="stat-badge">
+    <div class="stat-value">{{ stats.completedWorkouts }}</div>
+    <div class="stat-label">Treinos</div>
+  </div>
+  <div class="stat-badge">
+    <div class="stat-value">{{ stats.totalVolume| number:'1.0-0' }}</div>
+    <div class="stat-label">Kg Levantados</div>
+  </div>
+  <div class="stat-badge">
+    <div class="stat-value">{{ stats.streak }}</div>
+    <div class="stat-label">Dias de Foco</div>
+  </div>
+  <div class="stat-badge">
+    <div class="stat-value">{{ stats.achievements }}</div>
+    <div class="stat-label">Conquistas</div>
+  </div>
+</div>
