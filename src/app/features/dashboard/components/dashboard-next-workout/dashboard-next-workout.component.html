@@ -1,0 +1,21 @@
+<div *ngIf="workout; else noWorkouts" class="cta-card" [routerLink]="['/session', workout.id]">
+  <div class="cta-text">
+    <span>Próximo Treino</span>
+    <h2>{{ workout.name }}</h2>
+    <div class="workout-details">
+      <span><i class="pi pi-list"></i> {{ workout.exercises?.length || 0 }} exercícios</span>
+      <span><i class="pi pi-star-fill"></i> +150 XP</span>
+    </div>
+  </div>
+  <div class="cta-action">
+    <span>Começar</span>
+    <i class="pi pi-arrow-right"></i>
+  </div>
+</div>
+
+<ng-template #noWorkouts>
+  <div class="cta-card-empty" routerLink="/workouts/new">
+    <h2>Nenhum treino encontrado</h2>
+    <p>Crie o seu primeiro plano de treino para começar!</p>
+  </div>
+</ng-template>
