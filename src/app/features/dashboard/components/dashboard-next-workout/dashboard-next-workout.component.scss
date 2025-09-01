@@ -1,64 +1,61 @@
+// Variável SCSS local para o brilho, para fácil ajuste
+$primary-glow: 0 0 2px var(--primary-accent);
+
 .cta-card, .cta-card-empty {
-  background: var(--primary-accent);
-  color: var(--background-dark);
+  background: var(--surface-dark);
+  border: 2px solid var(--border-color);
+  color: var(--text-light);
   border-radius: 8px;
   padding: 1.5rem;
-  margin: 2rem auto;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px solid var(--border-color);
-  box-shadow: 4px 4px 0px 0px var(--border-color);
+  box-shadow: 4px 4px 0px 0px var(--shadow-color);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   text-decoration: none;
 
   &:hover {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px 0px var(--border-color);
+    box-shadow: 2px 2px 0px 0px var(--shadow-color);
+    border-color: var(--primary-accent); // Borda muda de cor no hover
   }
+}
 
-  .cta-text {
-    span {
-      font-weight: 700;
-      opacity: 0.8;
-    }
-    h2 {
-      font-family: 'Press Start 2P', cursive;
-      margin: 0.25rem 0 1rem 0;
-      font-size: 1.2rem;
-    }
-  }
-
-  .workout-details {
-    display: flex;
-    gap: 1.5rem;
-    font-weight: 700;
-    
-    span {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-  }
-
-  .cta-action {
+.cta-text {
+  h2 {
     font-size: 1.5rem;
-    font-weight: 700;
+    color: var(--primary-accent);
+    text-shadow: $primary-glow; // Aplica o brilho neon
+  }
+  p {
+    color: var(--text-muted);
+  }
+}
+
+.workout-details {
+  display: flex;
+  gap: 1.5rem;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-top: 1rem;
+    
+  span {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 }
 
+.cta-action {
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: var(--secondary-accent); // Ação "Começar" em magenta
+  text-shadow: 0 0 2px var(--secondary-accent);
+}
+
 .cta-card-empty {
-  background: var(--surface-dark);
-  color: var(--text-light);
   text-align: center;
-  flex-direction: column;
-  
-  h2 {
-    color: var(--primary-accent);
-    margin: 0 0 0.5rem;
-  }
 }

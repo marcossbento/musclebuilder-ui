@@ -1,14 +1,37 @@
+/* src/styles.scss */
+
+// ----------------------------------------------------
+// Estilos Globais da Aplicação
+// Este arquivo define a paleta de cores e os estilos base
+// para todos os componentes.
+// ----------------------------------------------------
+
+// 1. Definição da Paleta de Cores (CSS Custom Properties)
+// Movemos as variáveis de cor para o topo para fácil acesso.
+// Os nomes são semânticos, descrevendo o USO da cor, não a cor em si.
 :root {
-    --background-dark: #1A1A2E;
-    --surface-dark: #2A2A3E;
-    --text-light: #EAEAEA;
-    --primary-accent: #00F2E5; // Ciano
-    --success: #39FF14; // Verde-Limão
-    --warning: #FFFF00; // Amarelo
-    --error: #FF0054; // Rosa-Choque
-    --border-color: #5A5A7E;
+  // Cores de Fundo e Superfície (extraídas da imagem)
+  --background-dark: #1F1135; // Roxo bem escuro do fundo
+  --surface-dark: #2F214F;    // Roxo um pouco mais claro para os cards
+  --border-color: #5B4F83;     // Roxo mais claro para bordas
+  --shadow-color: #3F316F;     // Cor para o efeito de sombra pixelada
+
+  // Cores de Acento e Destaque
+  --primary-accent: #00FFFF;  // Ciano neon para títulos e elementos primários
+  --secondary-accent: #FF00FF;// Magenta neon para elementos secundários
+  
+  // Cores Semânticas (para feedback)
+  --success: #00FF00;         // Verde neon para progresso e sucesso
+  --warning: #FFFF00;         // Amarelo para avisos
+  --error: #FF0000;           // Vermelho para erros
+
+  // Cores de Texto
+  --text-light: #F0F0F0;       // Cor principal do texto (branco suave)
+  --text-muted: #A0A0A0;       // Cinza claro para textos secundários
+  --text-dark: #121212;        // Texto escuro para usar sobre fundos claros
 }
 
+// 2. Estilos base para a aplicação
 html,
 body {
     height: 100%;
@@ -16,38 +39,42 @@ body {
 
 body {
     margin: 0;
+    // As variáveis aplicam o tema principal ao corpo do documento.
     background-color: var(--background-dark);
     color: var(--text-light);
-    font-family: 'Pixelify Sans', sans-serif; // Fonte padrão para todo o app
-    -webkit-font-smoothing: none; // Deixa as fontes pixeladas mais nítidas
+    font-family: 'Pixelify Sans', sans-serif; // Fonte padrão para textos normais
+    -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: grayscale;
 }
 
+// 3. Estilos para Tipografia
+// Garante que todos os títulos usem a fonte pixelada e a cor de destaque.
 h1,
 h2,
 h3,
 .font-logo {
     font-family: 'Press Start 2P', cursive;
+    color: var(--primary-accent); // Títulos sempre em ciano neon
 }
+
+// 4. Refatoração dos Estilos de Componentes PrimeNG
+// Ajustamos os componentes para usarem as novas variáveis de tema.
 
 .p-button {
     border-radius: 4px !important;
-    border-width: 2px !important;
+    border: 2px solid var(--border-color) !important;
     font-family: 'Pixelify Sans', sans-serif !important;
     font-weight: 700 !important;
     text-transform: uppercase;
-    transition: none !important; // Remove transições suaves
-
-    // Efeito de sombra pixelada
-    box-shadow: 4px 4px 0px 0px var(--border-color);
+    transition: none !important;
+    box-shadow: 4px 4px 0px 0px var(--shadow-color); // Sombra pixelada
 
     &:enabled:hover {
         transform: translate(2px, 2px);
-        box-shadow: 2px 2px 0px 0px var(--border-color) !important;
+        box-shadow: 2px 2px 0px 0px var(--shadow-color) !important;
     }
 }
 
-// Estilo para Inputs
 .p-inputtext,
 .p-password-input {
     border-radius: 4px !important;
@@ -61,7 +88,6 @@ h3,
     }
 }
 
-// Estilo para Cards/Painéis
 .p-card {
     background: var(--surface-dark) !important;
     border: 2px solid var(--border-color) !important;

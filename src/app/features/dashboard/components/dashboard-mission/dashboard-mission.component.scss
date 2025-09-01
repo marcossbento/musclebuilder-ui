@@ -1,52 +1,85 @@
+/* src/app/features/dashboard/components/dashboard-mission/dashboard-mission.component.scss */
+
+// 1. Estilo principal do card
+// Reintroduzimos as propriedades de fundo, borda e sombra
+// para que o componente se pareça visualmente com um card.
 .mission-card {
-  background-color: var(--surface-dark);
+  background-color: var(--surface-dark); // Usa a cor de fundo padrão dos cards
   border: 2px solid var(--border-color);
   border-radius: 8px;
   padding: 1.5rem;
   margin-top: 2rem;
-  text-align: center;
+  text-align: left;
+  box-shadow: 4px 4px 0px 0px var(--shadow-color); // Sombra pixelada, igual aos outros cards
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 3px 3px 0px 0px var(--shadow-color);
+  }
 }
 
+// 2. Estilo do cabeçalho do card
+// O cabeçalho usa a cor de destaque secundária (magenta) para se diferenciar.
 .mission-header {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   gap: 0.75rem;
-  color: var(--primary-accent);
+  color: var(--secondary-accent);
   margin-bottom: 0.5rem;
 
   i {
+    // O ícone de bandeira.
     font-size: 1.5rem;
   }
+  
   h3 {
+    // O texto "Missão Semanal".
     margin: 0;
+    font-size: 1.1rem;
+    color: var(--secondary-accent); // Garante que a cor do título seja magenta
+    text-shadow: 0 0 2px var(--secondary-accent); // Adiciona um brilho neon
   }
 }
 
+// 3. Estilo do título da missão
+// O título principal da missão usa a cor de texto padrão para clareza.
 .mission-title {
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 1.1rem; // Tamanho de fonte legível
   margin: 0.5rem 0 1.5rem 0;
+  color: var(--text-light); // Cor de texto padrão
+  font-family: 'Pixelify Sans', sans-serif; // Fonte mais legível para descrições
+  font-weight: bold;
 }
 
+// 4. Estilos da barra de progresso
+// O container da barra tem um fundo mais escuro para criar profundidade.
 .mission-progress-bar-container {
   border: 2px solid var(--border-color);
   padding: 4px;
   border-radius: 4px;
+  background-color: var(--background-dark); // Fundo escuro para a barra se destacar
 }
 
 .mission-progress-bar {
   height: 15px;
-  background-color: var(--background-dark);
+  background-color: var(--shadow-color); // Cor da parte "não preenchida" da barra
 }
 
 .mission-progress-bar-fill {
   height: 100%;
-  background: var(--success); /* Usando a cor de sucesso para progresso */
-  transition: width 0.5s ease-in-out;
+  background: var(--primary-accent); 
+  box-shadow: 0 0 8px var(--primary-accent);
+  transition: width 0.5s ease-in-out; 
 }
 
+// 5. Rótulo de progresso (ex: "2 / 3")
 .mission-progress-label {
   margin-top: 0.5rem;
+  text-align: center;
+  font-family: 'Pixelify Sans', sans-serif;
   font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-muted); // Cor suave para não competir com os títulos
 }
