@@ -11,6 +11,7 @@ export interface WorkoutExerciseCreateDTO {
 
 export interface WorkoutDTO {
   id: number;
+  workoutId?: number;
   name: string;
   description?: string;
   difficultyLevel?: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';

@@ -1,0 +1,43 @@
+::ng-deep .avatar-button {
+  width: 50px; 
+  height: 50px;
+  background-color: var(--background-dark); 
+  border: 2px solid var(--border-color) !important; 
+  box-shadow: 2px 2px 0px 0px var(--shadow-color) !important; 
+
+  p-button svg {
+    width: 48px;
+    font-size: 1.5rem; 
+    color: var(--primary-accent); 
+  }
+
+  &:hover {
+    border-color: var(--primary-accent) !important;
+  }
+}
+
+::ng-deep .p-menu {
+  background-color: var(--background-dark) !important;
+  border: 2px solid var(--border-color) !important;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px 0px var(--shadow-color); 
+  padding: 0.5rem 0 !important;
+  margin-top: 0.5rem; 
+
+  .p-menuitem-link {
+    &:hover {
+      background-color: var(--background-dark) !important; 
+    }
+
+    .p-menuitem-text {
+      color: var(--text-light) !important; 
+      font-family: 'Pixelify Sans', sans-serif;
+      font-weight: bold;
+    }
+
+    .p-menuitem-icon {
+      color: var(--primary-accent) !important; 
+      font-size: 1.1rem;
+    }
+  }
+}

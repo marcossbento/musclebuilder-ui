@@ -84,8 +84,18 @@ export class DashboardService {
           goal: data.weeklyMission.goal
         }
 
+        const recommendedWorkoutFromAPi = data.recommendedWorkout;
+        let workoutForFrontend: WorkoutDTO | null = null;
+
+        if (recommendedWorkoutFromAPi) {
+          workoutForFrontend = {
+            ...recommendedWorkoutFromAPi,
+            id: recommendedWorkoutFromAPi.workoutId || 0
+          };
+        }
+
         this.dashboardStatsSubject.next(frontendStats);
-        this.nextWorkoutSubject.next(data.recommendedWorkout);
+        this.nextWorkoutSubject.next(workoutForFrontend);
         this.weeklyMissionSubject.next(frontendMission);
       })
     );

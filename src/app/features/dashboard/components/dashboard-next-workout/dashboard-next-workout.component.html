@@ -3,7 +3,7 @@
     <span>Próximo Treino</span>
     <h2>{{ workout.name }}</h2>
     <div class="workout-details">
-      <span><i class="pi pi-list"></i> {{ workout.exercises?.length || 0 }} exercícios</span>
+      <span><i class="pi pi-list"></i> {{ (workout.exercises|| []).length }} exercícios</span>
       <span><i class="pi pi-star-fill"></i> +150 XP</span>
     </div>
   </div>

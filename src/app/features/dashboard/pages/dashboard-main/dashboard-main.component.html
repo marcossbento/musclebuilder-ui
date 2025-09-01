@@ -1,20 +1,24 @@
 <div class="page-container">
-  <ng-container *ngIf="(dashboardStats$ | async) as stats">
+  <ng-container *ngIf="dashboardStats$ | async as stats">
     <div *ngIf="!isLoading" class="dashboard-content">
+      <div class="dashboard-header-actions">
+        <app-user-menu [user]="user$ | async"></app-user-menu>
+      </div>
 
-      <app-dashboard-header
-        [user]="user$ | async"
-        [stats]="stats">
+      <app-dashboard-header [user]="user$ | async" [stats]="stats">
       </app-dashboard-header>
 
-      <app-dashboard-next-workout [workout]="nextWorkout$ | async"></app-dashboard-next-workout>
+      <app-dashboard-next-workout
+        [workout]="nextWorkout"
+      ></app-dashboard-next-workout>
 
-      <app-dashboard-mission [mission]="weeklyMission$ | async"></app-dashboard-mission>
+      <app-dashboard-mission
+        [mission]="weeklyMission$ | async"
+      ></app-dashboard-mission>
 
       <p-divider styleClass="my-5"></p-divider>
 
       <app-dashboard-stats [stats]="stats"></app-dashboard-stats>
-
     </div>
   </ng-container>
 
