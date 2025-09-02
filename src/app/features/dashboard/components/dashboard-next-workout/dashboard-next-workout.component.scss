@@ -52,10 +52,15 @@ $primary-glow: 0 0 2px var(--primary-accent);
   align-items: center;
   gap: 0.5rem;
   margin-top: 1.5rem;
-  color: var(--secondary-accent); // Ação "Começar" em magenta
+  color: var(--secondary-accent); 
   text-shadow: 0 0 2px var(--secondary-accent);
 }
 
 .cta-card-empty {
   text-align: center;
+
+  svg {
+    color: var(--primary-accent);
+    width: 48px;
+  }
 }
