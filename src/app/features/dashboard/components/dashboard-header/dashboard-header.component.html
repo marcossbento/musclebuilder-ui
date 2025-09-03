@@ -1,16 +1,22 @@
 <div class="header-container" *ngIf="user && stats">
   <div class="greeting">
     <h1>Olá, {{ user.name }}!</h1>
-    
-  </div>
-  <div class="xp-bar-container">
     <p class="level-badge">
-      <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M12 1h2v8h8v4h-2v-2h-8V5h-2V3h2V1zM8 7V5h2v2H8zM6 9V7h2v2H6zm-2 2V9h2v2H4zm10 8v2h-2v2h-2v-8H2v-4h2v2h8v6h2zm2-2v2h-2v-2h2zm2-2v2h-2v-2h2zm0 0h2v-2h-2v2z" fill="currentColor"/> </svg>
+      <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M12 1h2v8h8v4h-2v-2h-8V5h-2V3h2V1zM8 7V5h2v2H8zM6 9V7h2v2H6zm-2 2V9h2v2H4zm10 8v2h-2v2h-2v-8H2v-4h2v2h8v6h2zm2-2v2h-2v-2h2zm2-2v2h-2v-2h2zm0 0h2v-2h-2v2z"
+          fill="currentColor"
+        />
+      </svg>
       Nível {{ stats.level || 1 }}
     </p>
+  </div>
+  <div class="xp-bar-container">
     <div class="xp-bar">
       <div class="xp-bar-fill" [style.width.%]="xpPercentage"></div>
     </div>
-    <div class="xp-label">{{ stats.xp || 0 }} / {{ stats.xpToNextLevel || 100 }} XP</div>
+  </div>
+  <div class="xp-label">
+    {{ stats.xp || 0 }} / {{ stats.xpToNextLevel || 100 }} XP
   </div>
 </div>
