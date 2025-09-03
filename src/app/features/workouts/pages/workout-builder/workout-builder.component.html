@@ -1,7 +1,6 @@
 <p-toast></p-toast>
 <div class="page-container">
   <div class="header">
-    <div class="header-left">
       <p-button
         label="Voltar"
         icon="pi pi-arrow-left"
@@ -9,17 +8,6 @@
         routerLink="/workouts"
       ></p-button>
       <h1 class="font-logo">Novo Treino</h1>
-    </div>
-
-    <div class="header-right">
-      <p-button
-        label="Salvar Treino"
-        icon="pi pi-save"
-        (click)="saveWorkout()"
-        [loading]="isSaving"
-        [disabled]="workoutForm.invalid"
-      ></p-button>
-    </div>
   </div>
 
   <form [formGroup]="workoutForm" class="workout-form">
@@ -98,6 +86,15 @@
         </div>
       </div>
     </div>
+
+    <p-button
+      label="Salvar Treino"
+      icon="pi pi-save"
+      (click)="saveWorkout()"
+      [loading]="isSaving"
+      [disabled]="workoutForm.invalid"
+      class="button-save"
+    ></p-button>
   </form>
 </div>
 

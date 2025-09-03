@@ -12,9 +12,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  margin-bottom: 2.5rem;
 
   h1 {
+    font-size: 1.5rem;
     color: var(--primary-accent);
   }
 }
@@ -23,6 +23,12 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+
+
+  .button-save {
+    display: flex;
+    justify-content: end;
+  }
 }
 
 .form-section {
@@ -34,10 +40,9 @@
   flex-direction: column;
   margin: 12px 0;
   gap: 0.5rem;
+  font-size: 1.5rem;
 
   label {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.9rem;
     opacity: 0.8;
   }
 
@@ -115,6 +120,7 @@
   display: flex;
   justify-content: flex-end;
 }
+
 
 @media (min-width: 769px) {
   .page-container {
