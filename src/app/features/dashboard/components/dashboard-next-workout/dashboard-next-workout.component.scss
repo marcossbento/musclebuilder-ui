@@ -1,4 +1,3 @@
-// Variável SCSS local para o brilho, para fácil ajuste
 $primary-glow: 0 0 2px var(--primary-accent);
 
 .cta-card, .cta-card-empty {
@@ -15,7 +14,7 @@ $primary-glow: 0 0 2px var(--primary-accent);
   &:hover {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0px 0px var(--shadow-color);
-    border-color: var(--primary-accent); // Borda muda de cor no hover
+    border-color: var(--primary-accent); 
   }
 }
 
@@ -23,7 +22,7 @@ $primary-glow: 0 0 2px var(--primary-accent);
   h2 {
     font-size: 1.5rem;
     color: var(--primary-accent);
-    text-shadow: $primary-glow; // Aplica o brilho neon
+    text-shadow: $primary-glow; 
   }
   p {
     color: var(--text-muted);
@@ -33,7 +32,6 @@ $primary-glow: 0 0 2px var(--primary-accent);
 .workout-details {
   display: flex;
   gap: 1.5rem;
-  font-family: 'Pixelify Sans', sans-serif;
   font-weight: 700;
   color: var(--text-muted);
   margin-top: 1rem;
@@ -53,11 +51,14 @@ $primary-glow: 0 0 2px var(--primary-accent);
   gap: 0.5rem;
   margin-top: 1.5rem;
   color: var(--secondary-accent); 
-  text-shadow: 0 0 2px var(--secondary-accent);
 }
 
 .cta-card-empty {
   text-align: center;
+
+  h2 {
+    font-size: 1.2rem;
+  }
 
   svg {
     color: var(--primary-accent);
