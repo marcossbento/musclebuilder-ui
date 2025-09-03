@@ -4,7 +4,7 @@
 
 ::ng-deep .user-menu-container {
   display: flex;
-  justify-content: end;
+  justify-content: start;
 }
 
 .header {
@@ -75,7 +75,6 @@
 }
 
 .card-title {
-  font-family: "Press Start 2P", cursive;
   font-size: 1rem;
   margin: 0 0 0.25rem 0;
 }
@@ -129,11 +128,9 @@
 
   .stat-value {
     display: block;
-    font-family: "Press Start 2P", cursive;
     font-size: 2rem;
     color: var(--primary-accent);
     margin-bottom: 0.5rem;
-    // Garante que o texto não quebre
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
