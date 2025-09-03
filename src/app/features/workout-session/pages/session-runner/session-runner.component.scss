@@ -24,7 +24,6 @@
   text-align: center;
   margin-bottom: 2rem;
   h2 {
-    font-family: 'Press Start 2P', cursive;
   }
 }
 
@@ -39,19 +38,23 @@
   grid-template-columns: 1fr 2fr 2fr 1fr;
   align-items: center;
   text-align: center;
-  gap: 1rem;
+  gap: .5rem;
+}
+
+.div-sets {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
 
 .sets-header {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   opacity: 0.7;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--border-color);
 }
 
 .set-number {
-  font-family: 'Press Start 2P', cursive;
   font-size: 1.2rem;
 }
 
@@ -74,11 +77,13 @@
 ::ng-deep {
   .set-row .p-inputnumber {
     width: 100%;
+    gap: .5rem;
   }
 
   .set-row .p-inputnumber .p-inputtext {
     width: 100%;
     text-align: center;
+    padding: 0;
   }
 
   .set-row .p-inputnumber-button {
