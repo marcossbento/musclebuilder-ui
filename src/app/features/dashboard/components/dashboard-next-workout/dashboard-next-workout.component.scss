@@ -22,7 +22,6 @@ $primary-glow: 0 0 2px var(--primary-accent);
   h2 {
     font-size: 1.5rem;
     color: var(--primary-accent);
-    text-shadow: $primary-glow; 
   }
   p {
     color: var(--text-muted);
@@ -63,5 +62,10 @@ $primary-glow: 0 0 2px var(--primary-accent);
   svg {
     color: var(--primary-accent);
     width: 48px;
+  }
+
+  p-button svg {
+    margin-right: 8px;
+    width: 24px;
   }
 }
