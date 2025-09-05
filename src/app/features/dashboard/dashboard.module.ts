@@ -11,7 +11,6 @@ import { DashboardStatsComponent } from './components/dashboard-stats/dashboard-
 import { DashboardMissionComponent } from './components/dashboard-mission/dashboard-mission.component';
 import { DashboardNextWorkoutComponent } from './components/dashboard-next-workout/dashboard-next-workout.component';
 import { ProgressSpinnerModule } from "primeng/progressspinner";
-import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { MenuModule } from 'primeng/menu';
 
 
@@ -22,7 +21,6 @@ import { MenuModule } from 'primeng/menu';
     DashboardStatsComponent,
     DashboardMissionComponent,
     DashboardNextWorkoutComponent,
-    UserMenuComponent,
   ],
   imports: [
     CommonModule,

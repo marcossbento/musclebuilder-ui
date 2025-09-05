@@ -1,9 +1,6 @@
 <div class="page-container">
   <ng-container *ngIf="dashboardStats$ | async as stats">
     <div *ngIf="!isLoading" class="dashboard-content">
-      <div class="dashboard-header-actions">
-        <app-user-menu [user]="user$ | async"></app-user-menu>
-      </div>
 
       <app-dashboard-header [user]="user$ | async" [stats]="stats">
       </app-dashboard-header>

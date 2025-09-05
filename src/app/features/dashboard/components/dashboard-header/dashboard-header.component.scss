@@ -1,31 +1,56 @@
-.header-container {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.greeting h1 {
-  text-align: left;
-  font-size: 1.5rem;
-  color: var(--text-light); 
-  text-shadow: 2px 2px 0px var(--shadow-color); 
-}
-
-.level-badge {
-  display: inline-flex;
-  flex-direction: row;
-  background-color: var(--primary-accent);
-  color: var(--text-dark); 
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px 0px var(--shadow-color);
-  font-size: 1.5rem;
-  margin: 0;
-  gap: 4px;
-
-  svg {
-    width: 24px;
+:host {
+  .profile-header-container {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    margin-bottom: .8rem;
   }
+
+  .user-info-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+::ng-deep .avatar-button {
+  width: 60px; 
+  height: 60px;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--surface-dark);
+  border: 2px solid var(--border-color) !important;
+  box-shadow: 2px 2px 0px 0px var(--shadow-color) !important;
+
+  img {
+    width: 48px;
+    color: var(--primary-accent);
+  }
+
+  &:hover {
+    border-color: var(--primary-accent) !important;
+  }
+}
+
+.user-text-info {
+  display: flex;
+  flex-direction: column; 
+}
+
+.user-name {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.user-level {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
 }
 
 .xp-bar-container {
@@ -33,24 +58,46 @@
   border: 2px solid var(--border-color);
   padding: 5px;
   border-radius: 4px;
-  margin-top: 1rem;
 }
 
 .xp-bar {
-  height: 5px;
-  background-color: var(--shadow-color); 
+  height: 10px;
+  background-color: var(--shadow-color);
 }
 
 .xp-bar-fill {
   height: 100%;
-  background: var(--primary-accent); 
-  box-shadow: 0 0 8px var(--primary-accent); 
+  background: var(--primary-accent);
+  box-shadow: 0 0 8px var(--primary-accent);
   transition: width 0.8s ease-out;
 }
 
 .xp-label {
-  margin-top: 0.5rem;
+  text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text-muted); 
+  color: var(--text-muted);
+}
+
+::ng-deep .p-menu {
+  background-color: var(--surface-dark) !important;
+  border: 2px solid var(--border-color) !important;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px 0px var(--shadow-color);
+  padding: 0.5rem 0 !important;
+  margin-top: 0.5rem;
+
+  .p-menuitem-link:hover {
+    background-color: var(--background-dark) !important;
+  }
+
+  .p-menuitem-text {
+    color: var(--text-light) !important;
+    font-weight: bold;
+  }
+
+  .p-menuitem-icon {
+    color: var(--primary-accent) !important;
+    font-size: 1.1rem;
+  }
 }
