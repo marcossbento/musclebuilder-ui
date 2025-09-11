@@ -7,22 +7,23 @@
 
 // 1. Definição da Paleta de Cores
 :root {
-  --background-dark: #1F1135;
-  --surface-dark: #2F214F;
-  --border-color: #5B4F83;
-  --shadow-color: #3F316F;
-  --primary-accent: #00FFFF;
-  --secondary-accent: #FF00FF;
-  --success: #00FF00;
-  --warning: #FFFF00;
-  --error: #FF0000;
-  --text-light: #F0F0F0;
-  --text-muted: #A0A0A0;
+  --background-dark: #1f1135;
+  --surface-dark: #2f214f;
+  --border-color: #5b4f83;
+  --shadow-color: #3f316f;
+  --primary-accent: #00ffff;
+  --secondary-accent: #ff00ff;
+  --success: #00ff00;
+  --warning: #ffff00;
+  --error: #ff0000;
+  --text-light: #f0f0f0;
+  --text-muted: #a0a0a0;
   --text-dark: #121212;
 }
 
 // 2. Estilos de Base
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -31,15 +32,21 @@ body {
   background-color: var(--background-dark);
   color: var(--text-light);
   // Define a fonte padrão para textos normais em toda a aplicação.
-  font-family: 'Jersey 10', sans-serif;
+  font-family: "Jersey 10", sans-serif;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
 }
 
 // 3. Tipografia Global
 // Define a fonte principal (pixelada) para todos os níveis de título.
-h1, h2, h3, h4, h5, h6, .font-logo {
-  font-family: 'Press Start 2P', cursive;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-logo {
+  font-family: "Press Start 2P", cursive;
   color: var(--primary-accent);
 }
 
@@ -52,19 +59,23 @@ h1, h2, h3, h4, h5, h6, .font-logo {
 .p-inputtext,
 .p-button .p-button-label,
 .p-card .p-card-subtitle,
-.p-toast .p-toast-detail, .p-field {
+.p-toast .p-toast-detail,
+.p-field {
   // Aplica a fonte de texto padrão a todos estes elementos.
-  font-family: 'Jersey 10', sans-serif !important;
+  font-family: "Jersey 10", sans-serif !important;
 }
 
 .p-card .p-card-title,
 .p-dialog .p-dialog-title {
   // Aplica a fonte de título aos títulos de cards e diálogos.
-  font-family: 'Press Start 2P', cursive !important;
+  font-family: "Press Start 2P", cursive !important;
+}
+
+.p-progress-spinner-circle {
+  stroke: var(--primary-accent) !important;
 }
 
 // --- FIM DA CENTRALIZAÇÃO ---
-
 
 // 5. Estilos de Componentes PrimeNG Refatorados (que você já tinha)
 .p-button {
@@ -81,7 +92,8 @@ h1, h2, h3, h4, h5, h6, .font-logo {
   }
 }
 
-.p-inputtext, .p-password-input {
+.p-inputtext,
+.p-password-input {
   border-radius: 4px !important;
   border: 2px solid var(--border-color) !important;
   background: var(--surface-dark) !important;

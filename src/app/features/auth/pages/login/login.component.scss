@@ -38,6 +38,11 @@
   display: flex;
   justify-content: center;
 
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+  }
+
   p-card {
     width: 100%;
     max-width: 400px;
