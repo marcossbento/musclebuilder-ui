@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { LoginRequest } from '../models/user.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { LoginRequest, LoginResponse } from '../models/user.model';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -20,21 +20,19 @@ export class AuthService {
     this.checkInitialAuthState();
   }
 
-  private checkInitialAuthState(): void {
-    const isAuthenticated = localStorage.getItem(this.AUTH_KEY) ==='true';
-    this.isAuthenticatedSubject.next(isAuthenticated)
-  }
-
   public getIsAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
   }
 
   login(credentials: LoginRequest): Observable<void> {
-    return this.http.post<void>(`${this.API_URL}/login`, credentials).pipe(
-      tap(() => {
-        localStorage.setItem(this.AUTH_KEY, 'true');
+    return this.http.post<LoginResponse>(`${this.API_URL}/login`, credentials).pipe(
+      tap(response => {
+        localStorage.setItem(this.AUTH_KEY, response.token);
         
         this.isAuthenticatedSubject.next(true);
+      }),
+      map(() => {
+        return;
       })
     );
   }
@@ -45,5 +43,14 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false)
 
     this.router.navigate(['/auth']);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.AUTH_KEY);
+  }
+
+  private checkInitialAuthState(): void {
+    const token = this.getToken();
+    this.isAuthenticatedSubject.next(!!token);
   }
 }
