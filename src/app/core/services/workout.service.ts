@@ -18,6 +18,10 @@ export class WorkoutService {
     return this.http.get<WorkoutDTO>(`${this.API_URL}/${id}`);
   }
 
+  getRecommendedWorkout(): Observable<WorkoutDTO | null> {
+    return this.http.get<WorkoutDTO | null>(`${this.API_URL}/recommended`)
+  }
+
   createWorkout(workoutData: WorkoutCreateDTO): Observable<WorkoutDTO> {
     return this.http.post<WorkoutDTO>(this.API_URL, workoutData);
   }
