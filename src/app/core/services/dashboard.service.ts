@@ -34,16 +34,17 @@ interface ApiStats {
 }
 
 interface ApiWeeklyMission {
-  title: string;
-  completed: number;
+  description: string;
+  xpReward: number;
   goal: number;
+  currentProgress: number;
 }
 
 // Interface principal da resposta da API
 export interface DashboardApiResponse {
   userLevel: ApiUserLevel;
   stats: ApiStats;
-  weeklyMission: ApiWeeklyMission;
+  activeMissions: ApiWeeklyMission[];
   recommendedWorkout: WorkoutDTO;
 }
 
@@ -78,10 +79,16 @@ export class DashboardService {
           achievements: 0
         };
 
-        const frontendMission: WeeklyMission = {
-          title: data.weeklyMission.title,
-          progress: data.weeklyMission.completed,
-          goal: data.weeklyMission.goal
+        let frontendMission: WeeklyMission | null = null;
+
+        if (data.activeMissions && data.activeMissions.length > 0) {
+          const firstMissionFromApi = data.activeMissions[0];
+
+          frontendMission = {
+            title: firstMissionFromApi.description,
+            progress: firstMissionFromApi.currentProgress,
+            goal: firstMissionFromApi.goal
+          };
         }
 
         const recommendedWorkoutFromAPi = data.recommendedWorkout;
