@@ -110,10 +110,12 @@ export class WorkoutBuilderComponent implements OnInit {
         setTimeout(() => this.router.navigate(['/workouts']), 1500);
       },
       error: (err) => {
+        const detailMessage = err?.error?.message || 'Não foi posśivel salvar o treino.';
+        
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: 'Não foi possível salvar o treino.',
+          detail: detailMessage,
         });
         this.isSaving = false;
       },

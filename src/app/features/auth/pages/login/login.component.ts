@@ -46,10 +46,12 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
+        const detailMessage = err?.error?.message || 'Email ou senha inválidos';
+
         this.messageService.add({ 
           severity: 'error', 
           summary: 'Erro no Login', 
-          detail: 'Email ou senha inválidos.' 
+          detail: detailMessage
         });
       }
     })

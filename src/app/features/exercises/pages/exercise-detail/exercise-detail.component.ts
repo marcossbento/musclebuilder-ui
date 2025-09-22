@@ -26,7 +26,9 @@ export class ExerciseDetailComponent implements OnInit {
           this.isLoading = false;
         },
         error: (err) => {
-          console.error('Exercício não encontrado', err);
+          const errorMessage = err?.error?.message || 'Erro desconhecido';
+
+          console.error(`Falha ao buscar exercício: ${errorMessage}`, err);
           this.isLoading = false;
           this.router.navigate(['/exercises']);
         }
