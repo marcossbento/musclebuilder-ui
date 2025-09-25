@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
   ],
   providers: [
     MessageService,
-    provideHttpClient(withInterceptors([authInterceptor]))
+    provideHttpClient(withInterceptors([authInterceptor, errorInterceptor]))
   ],
   bootstrap: [AppComponent],
 })

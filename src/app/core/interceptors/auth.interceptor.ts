@@ -6,26 +6,19 @@ import { catchError, throwError } from 'rxjs';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   
   const authService = inject(AuthService);
-  const token = authService.getToken();
+  const accessToken = authService.getAccessToken();
 
-  if (!token) {
-    return next(req);
+  const isApiRequest = req.url.startsWith('/api');
+  const isAuthRequest = req.url.includes('/auth/login') || req.url.includes('/auth/refresh');
+
+  if (accessToken && isApiRequest &&!isAuthRequest) {
+    const cloned = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return next(cloned);
   }
 
-  const authReq = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  return next(authReq).pipe(
-    catchError((error: any) => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
-          console.log('Sessão expirada ou inválida. Fazendo logout...');
-          authService.logout();
-      }
-      return throwError(() => error);
-    })
-  )
-
+  return next(req);
 };
