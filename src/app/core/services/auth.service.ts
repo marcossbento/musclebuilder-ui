@@ -14,12 +14,10 @@ export interface AuthenticationResponse {
   providedIn: 'root'
 })
 
-
-
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private readonly API_URL = '/api';
+  private readonly API_URL = '/api/auth';
 
   private readonly ACCESS_TOKEN_KEY = 'musclebuilder_access_token'
   private readonly REFRESH_TOKEN_KEY = 'musclebuilder_refresh_token'

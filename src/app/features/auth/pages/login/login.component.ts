@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthenticationResponse, AuthService } from '../../../../core/services/auth.service';
 import { LoginRequest } from '../../../../core/models/user.model';
 import { finalize } from 'rxjs';
 import { MessageService } from 'primeng/api';
@@ -42,8 +42,16 @@ export class LoginComponent {
         this.loginForm.enable();
       })
     ).subscribe({
-      next: () => {
-        this.router.navigate(['/dashboard']);
+      next: (response: AuthenticationResponse) => {
+        if (response && response.accessToken) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro Inesperado',
+            detail: 'A resposta do servidor foi inválida. Por favor, tente novamente.'
+          });
+        }
       },
       error: (err) => {
         const detailMessage = err?.error?.message || 'Email ou senha inválidos';
