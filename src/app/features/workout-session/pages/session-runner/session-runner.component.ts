@@ -66,6 +66,8 @@ export class SessionRunnerComponent implements OnInit {
     const currentExercise = this.workout.exercises[this.currentExerciseIndex];
     const exerciseId = currentExercise.exerciseId;
 
+    console.log('A processar o exercício:', currentExercise);
+
     if (this.exerciseForms[exerciseId]) {
       this.currentExerciseForm = this.exerciseForms[exerciseId];
     } else {
