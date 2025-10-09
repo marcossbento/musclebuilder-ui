@@ -6,6 +6,7 @@ import {
   forkJoin,
   Observable,
   Subscription,
+  switchMap,
 } from 'rxjs';
 import {
   DashboardService,
@@ -63,13 +64,10 @@ export class DashboardMainComponent implements OnInit, OnDestroy {
   loadDashboardData(): void {
     this.isLoading = true;
 
-    const dataSources = {
-      dashboardData: this.dashboardService.loadDashboardData(),
-      recommendedWorkout: this.workoutService.getRecommendedWorkout(),
-    };
-
-    forkJoin(dataSources).subscribe({
-      next: ({ dashboardData, recommendedWorkout }) => {
+    this.dashboardService.loadDashboardData().pipe(
+      switchMap(() => this.dashboardService.nextWorkout$)
+    ).subscribe({
+      next: (recommendedWorkout) => {
         this.nextWorkout = recommendedWorkout;
         this.isLoading = false;
       },
@@ -77,8 +75,7 @@ export class DashboardMainComponent implements OnInit, OnDestroy {
         console.error('Erro ao carregar dados do dashboard', err);
         this.isLoading = false;
         this.nextWorkout = null;
-        //TODO: tratar erro com toast
-      },
+      }
     });
   }
 

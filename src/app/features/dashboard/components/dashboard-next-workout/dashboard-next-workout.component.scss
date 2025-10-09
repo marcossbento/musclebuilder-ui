@@ -42,6 +42,50 @@ $primary-glow: 0 0 2px var(--primary-accent);
   }
 }
 
+.pixel-button {
+  // Configuração base
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem; 
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+
+  background-color: var(--surface-dark);
+  color: var(--primary-accent);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  text-transform: uppercase;
+  
+  text-shadow: 3px 3px 0px var(--shadow-color);
+  // A "mágica" do efeito 3D
+  border: 2px solid var(--primary-accent); // Uma borda escura fina para contorno
+  border-radius: 8px; // Um arredondamento mínimo para suavizar os cantos de pixel
+  
+  // Criamos a "espessura" do botão com uma sombra sólida e deslocada.
+  // Use a cor de sombra do seu tema para manter a consistência.
+  box-shadow: 4px 4px 0px 0px var(--shadow-color);
+
+  // O "coreógrafo" da nossa animação de clique.
+  // Ele suavizará a mudança de 'transform' e 'box-shadow'.
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+// A animação de clique!
+.pixel-button:active {
+  // 1. Movemos o botão para baixo e para a direita, para a posição onde a sombra estava.
+  transform: translate(4px, 4px);
+
+  // 2. Removemos a sombra, criando a ilusão de que o botão "afundou" no ecrã.
+  box-shadow: none;
+}
+
+// Removemos a regra de :hover que tínhamos antes, focando apenas no clique.
+// O hover do card principal ainda funciona, o que é um bom efeito subtil.
+.cta-card:hover {
+  border-color: var(--primary-accent);
+}
+
+
 .cta-action {
   font-size: 1.2rem;
   font-weight: 700;

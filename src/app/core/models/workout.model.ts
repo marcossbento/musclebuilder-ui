@@ -22,6 +22,7 @@ export interface WorkoutDTO {
     repsPerSet: number;
     weight: number;
   }[];
+  estimatedXp?: number;
 }
 
 export interface WorkoutCreateDTO {

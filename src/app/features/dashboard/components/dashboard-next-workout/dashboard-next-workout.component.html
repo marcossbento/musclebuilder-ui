@@ -3,14 +3,16 @@
     <span>Próximo Treino</span>
     <h2>{{ workout.name }}</h2>
     <div class="workout-details">
-      <span><i class="pi pi-list"></i> {{ (workout.exercises|| []).length }} exercícios</span>
-      <span><i class="pi pi-star-fill"></i> +150 XP</span>
+      <span><i class="hn hn-bullet-list-solid"></i> {{ (workout.exercises|| []).length }} exercícios</span>
+      <span><i class="hn hn-star-solid"></i> +{{ workout.estimatedXp }} XP</span>
     </div>
   </div>
   <div class="cta-action">
-    <span>Começar</span>
-    <i class="pi pi-arrow-right"></i>
-  </div>
+  <span class="pixel-button">  
+    Começar
+    <i class="hn hn-play-solid"></i>
+  </span>
+</div>
 </div>
 
 <ng-template #noWorkouts>
