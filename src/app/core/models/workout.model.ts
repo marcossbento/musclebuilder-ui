@@ -23,6 +23,7 @@ export interface WorkoutDTO {
     weight: number;
   }[];
   estimatedXp?: number;
+  exerciseCount: number;
 }
 
 export interface WorkoutCreateDTO {
