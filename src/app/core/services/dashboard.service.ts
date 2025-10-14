@@ -31,6 +31,7 @@ interface ApiStats {
   totalWorkouts: number;
   totalVolume: number;
   streak: number;
+  achievementsCount: number;
 }
 
 interface ApiWeeklyMission {
@@ -76,7 +77,7 @@ export class DashboardService {
           completedWorkouts: data.stats.totalWorkouts,
           totalVolume: data.stats.totalVolume,
           streak: data.stats.streak,
-          achievements: 0
+          achievements: data.stats.achievementsCount
         };
 
         let frontendMission: WeeklyMission | null = null;
