@@ -22,9 +22,11 @@ export class AuthService {
   private readonly ACCESS_TOKEN_KEY = 'musclebuilder_access_token'
   private readonly REFRESH_TOKEN_KEY = 'musclebuilder_refresh_token'
 
-
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  private logoutReason = new BehaviorSubject<string | null>(null);
+  public logoutReason$ = this.logoutReason.asObservable();
 
   constructor() {
     this.checkInitialAuthState();
@@ -74,7 +76,14 @@ export class AuthService {
     return localStorage.getItem(this.REFRESH_TOKEN_KEY);
   }
 
-  logout(): void {
+  logout(reason?: string): void {
+    console.log('[AuthService] Logout chamado. Razão:', reason);
+
+    if (reason) {
+      console.log('[AuthService] A emitir razão no logoutReason Subject.');
+      this.logoutReason.next(reason);
+    }
+
     localStorage.removeItem(this.ACCESS_TOKEN_KEY);
     localStorage.removeItem(this.REFRESH_TOKEN_KEY);
 
@@ -83,9 +92,18 @@ export class AuthService {
     this.router.navigate(['/auth']);
   }
 
+  public clearLogoutReason(): void {
+    this.logoutReason.next(null);
+  }
+
   private checkInitialAuthState(): void {
     const token = this.getAccessToken();
-    this.isAuthenticatedSubject.next(!!token);
+    
+    if (token && !this.isTokenExpired(token)) {
+      this.isAuthenticatedSubject.next(true);
+    } else {
+      this.isAuthenticatedSubject.next(false);
+    }
   }
 
   private isTokenExpired(token: string): boolean {

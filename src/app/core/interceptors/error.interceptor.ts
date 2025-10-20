@@ -42,7 +42,8 @@ const handle401error = (
       }),
       catchError((err) => {
         isRefreshing = false;
-        authService.logout();
+        console.log('[ErrorInterceptor] Refresh token falhou. A chamar logout com razão.');
+        authService.logout('A sua sessão expirou. Faça login novamente.');
         return throwError(() => err);
       })
     );

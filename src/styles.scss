@@ -110,3 +110,99 @@ h6,
   border-radius: 8px !important;
   box-shadow: none !important;
 }
+
+// --- ESTILIZAÇÃO DOS TOASTS PRIMENG ---
+
+// 1. O Container Principal
+.p-toast {
+  overflow: visible !important;
+  z-index: 99999 !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+.p-toast .p-toast-message {
+  background: var(--surface-dark) !important; 
+  border: 2px solid var(--border-color) !important; 
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0px 0px var(--shadow-color) !important; 
+  margin-bottom: 1rem !important; 
+}
+
+.p-toast .p-toast-message-content {
+  padding: 1rem 1.5rem !important; 
+  border: none !important; 
+  align-items: center !important;
+}
+
+// 3. Ícone de Severidade (à esquerda)
+.p-toast .p-toast-message-icon {
+  font-size: 1.8rem !important; 
+  margin-right: 1rem !important; 
+}
+
+// 4. Textos (Título e Detalhe)
+.p-toast .p-toast-summary {
+  font-family: 'Press Start 2P', cursive !important; 
+  font-size: 1rem !important;
+  font-weight: normal !important; 
+  color: var(--text-light) !important; 
+  margin-bottom: 0.5rem !important;
+}
+
+.p-toast .p-toast-detail {
+  font-family: 'Jersey 10', sans-serif !important; 
+  font-size: 1.1rem !important;
+  color: var(--text-muted) !important; 
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+// Botão de Fechar (à direita)
+.p-toast .p-toast-icon-close {
+  color: var(--text-muted) !important; 
+  transition: color 0.2s ease;
+  width: 2rem !important; 
+  height: 2rem !important;
+  border-radius: 0 !important;
+
+  &:hover {
+    color: var(--primary-accent) !important; 
+    background: none !important; 
+  }
+}
+
+// Cores Específicas por Severidade 
+// Sucesso (Verde)
+.p-toast .p-toast-message-success {
+  border-left: 6px solid var(--success) !important; 
+  .p-toast-message-icon {
+    color: var(--success) !important; 
+  }
+}
+
+// Informação (Ciano - Primária)
+.p-toast .p-toast-message-info {
+  border-left: 6px solid var(--primary-accent) !important;
+  .p-toast-message-icon {
+    color: var(--primary-accent) !important;
+  }
+}
+
+// Aviso (Amarelo)
+.p-toast .p-toast-message-warn {
+  border-left: 6px solid var(--warning) !important;
+  .p-toast-message-icon {
+    color: var(--warning) !important;
+  }
+}
+
+// Erro (Vermelho)
+.p-toast .p-toast-message-error {
+  border-left: 6px solid var(--error) !important;
+  .p-toast-message-icon {
+    color: var(--error) !important;
+  }
+}
+
+// --- FIM DA ESTILIZAÇÃO DOS TOASTS PRIMENG ---
