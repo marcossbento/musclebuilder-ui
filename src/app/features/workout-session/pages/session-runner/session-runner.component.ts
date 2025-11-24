@@ -198,4 +198,40 @@ export class SessionRunnerComponent implements OnInit {
         }
       });
   }
+
+  onExitSession(): void {
+    // TODO: dialog para confirmar
+    this.router.navigate(['/dashboard']);
+  }
+
+  // Ajusta o peso de uma série específica.
+  adjustWeight(index: number, delta: number): void {
+    const control = this.setsFormArray.at(index).get('weight');
+    if (control) {
+      const currentValue = control.value || 0;
+      // Garante valor positivo
+      const newValue = Math.max(0, currentValue + delta);
+      control.setValue(newValue);
+      control.markAsDirty();
+    }
+  }
+
+  // Ajusta as reps de uma série específica.
+  adjustReps(index: number, delta: number): void {
+    const control = this.setsFormArray.at(index).get('reps');
+    if (control) {
+      const currentValue = control.value || 0;
+      // Garante valor positivo
+      const newValue = Math.max(0, currentValue + delta);
+      control.setValue(newValue);
+      control.markAsDirty();
+    }
+  }
+
+  // Calcula a % da barra de progresso
+  get progressPercentage(): number {
+    if (!this.workout || !this.workout.exercises) return 0;
+    // +1 já que o index começa em 0, mas visualmente a ideia é já haver progresso desde o início
+    return ((this.currentExerciseIndex + 1) / this.workout.exercises.length) * 100;
+  }
 }
