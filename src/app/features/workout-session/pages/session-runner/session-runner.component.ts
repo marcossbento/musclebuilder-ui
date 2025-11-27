@@ -204,7 +204,7 @@ export class SessionRunnerComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  // Ajusta o peso de uma série específica.
+  // Ajusta o peso de uma série específica. Delta = valor(determinado no HTML) que é subtraído ou adicionado nos botões [-] e [+].
   adjustWeight(index: number, delta: number): void {
     const control = this.setsFormArray.at(index).get('weight');
     if (control) {
@@ -216,7 +216,7 @@ export class SessionRunnerComponent implements OnInit {
     }
   }
 
-  // Ajusta as reps de uma série específica.
+  // Ajusta as reps de uma série específica. Delta = valor(determinado no HTML) que é subtraído ou adicionado nos botões [-] e [+].
   adjustReps(index: number, delta: number): void {
     const control = this.setsFormArray.at(index).get('reps');
     if (control) {
