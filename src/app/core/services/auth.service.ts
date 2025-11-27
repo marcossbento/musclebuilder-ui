@@ -28,6 +28,9 @@ export class AuthService {
   private logoutReason = new BehaviorSubject<string | null>(null);
   public logoutReason$ = this.logoutReason.asObservable();
 
+  public isRefreshing = false;
+  public refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
   constructor() {
     this.checkInitialAuthState();
   }
