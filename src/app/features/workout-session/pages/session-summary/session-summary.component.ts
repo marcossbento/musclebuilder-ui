@@ -27,6 +27,4 @@ export class SessionSummaryComponent implements OnInit{
         this.isLoading = false;
       });
   }
-
-
 }

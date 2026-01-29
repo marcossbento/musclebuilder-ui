@@ -7,10 +7,12 @@
 .header {
   text-align: center;
   margin-bottom: 2.5rem;
+
   h1 {
-    color: var(--success); 
+    color: var(--success);
     font-size: 2rem;
   }
+
   p {
     font-size: 1.2rem;
     opacity: 0.8;
@@ -30,11 +32,13 @@
   border-radius: 8px;
   padding: 1.5rem;
   text-align: center;
+
   .stat-value {
     display: block;
     font-size: 2.5rem;
     color: var(--primary-accent);
   }
+
   .stat-label {
     display: block;
     font-size: 1.5rem;
@@ -53,64 +57,135 @@
 .exercise-summary-row {
   display: flex;
   flex-direction: column;
-  background-color: var(--surface-dark);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  
-  .exercise-name {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
+  background-color: rgba(255, 255, 255, 0.03); // Glass effect subtly
+  border: 1px solid var(--primary-500); // Using a colored border potentially to match branding
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); // Depth
 
-  .performance-details {
+  .exercise-header {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+
+    .exercise-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff; // Ensure white text
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(var(--primary-rgb), 0.15); // Presuming a primary variable exists, else fallback
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--primary-300, #90caf9);
+      border: 1px solid var(--primary-700, #1565c0);
+
+      i {
+        font-size: 0.8rem;
+      }
+    }
   }
 
-  .detail-item {
-    text-align: center;
-    .detail-label {
-      display: block;
-      font-size: 0.8rem;
-      opacity: 0.6;
-      text-transform: uppercase;
+  .sets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .set-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4); // Dark background
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.5rem;
+    width: 100%;
+    height: 110px;
+    border-radius: 8px;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary-400);
     }
-    .detail-value {
-      display: block;
-      font-size: 1.2rem;
-      font-weight: 700;
+
+    .set-index {
+      position: absolute;
+      top: -10px;
+      left: 10px; // Corner badge style instead of centered
+      background-color: var(--primary-color, #3B82F6);
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Press Start 2P', cursive, monospace; // Trying to find a pixel font if available, else monospace
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .set-data {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 0.5rem;
+    }
+
+    .set-weight {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 0.2rem;
+      font-family: monospace;
     }
   }
 }
 
 .footer-actions {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-top: 3rem;
+  width: 100%;
 }
 
 // Desktop
 @media (min-width: 769px) {
   .page-container {
     padding: 3rem;
+    max-width: 1100px; // Allow more width
   }
 
   .exercise-summary-row {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 
-    .exercise-name {
-      text-align: left;
+    .exercise-header {
+      flex: 0 0 35%; // Fixed width for header
+      border-bottom: none;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
       margin-bottom: 0;
-      flex: 1.5; 
+      margin-right: 2rem;
+      padding-bottom: 0;
+      padding-right: 1rem;
     }
 
-    .performance-details {
-      flex: 2; 
+    .sets-grid {
+      flex: 1;
+      justify-content: flex-start;
     }
   }
 }

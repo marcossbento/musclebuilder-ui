@@ -29,20 +29,19 @@
     <div class="exercise-list">
       <h2 class="font-logo">Detalhes</h2>
       <div *ngFor="let log of workoutLog.exerciseLogs" class="exercise-summary-row">
-        <span class="exercise-name">{{ log.exerciseName }}</span>
-        <div class="performance-details">
-          <div class="detail-item">
-            <span class="detail-label">Meta</span>
-            <span class="detail-value">{{ log.targetSets }}x{{ log.targetReps }}</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Realizado</span>
-            <span class="detail-value">{{ log.setsCompleted }}x [{{ log.repsPerSet }}]</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Peso</span>
-            <span class="detail-value">{{ log.weightUsed || 0 }} kg</span>
-          </div>
+        <div class="exercise-header">
+           <span class="exercise-name">{{ log.exerciseName }}</span>
+           <div class="meta-badge" *ngIf="log.targetSets && log.targetReps">
+             <i class="pi pi-bullseye"></i> Meta: {{ log.targetSets }}x{{ log.targetReps }}
+           </div>
+        </div>
+
+        <div class="sets-grid">
+           <div *ngFor="let set of log.sets; let i = index" class="set-item">
+              <span class="set-index">#{{ i + 1 }}</span>
+              <span class="set-data">{{ set.reps }} reps</span>
+              <span class="set-weight">{{ set.weight }} kg</span>
+           </div>
         </div>
       </div>
     </div>
