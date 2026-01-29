@@ -5,6 +5,12 @@ export interface StartWorkoutRequest {
   workoutName: string;
 }
 
+export interface ExerciseLogSetResponse {
+  reps: number;
+  weight: number;
+  orderIndex: number;
+}
+
 export interface ExerciseLogResponse {
   id: number;
   exerciseName: string;
@@ -13,6 +19,7 @@ export interface ExerciseLogResponse {
   setsCompleted: number;
   targetSets?: number;
   targetReps?: number;
+  sets: ExerciseLogSetResponse[];
 }
 
 export interface WorkoutLogResponse {

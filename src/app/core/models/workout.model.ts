@@ -42,8 +42,9 @@ export enum WorkoutLogStatus {
 
 export interface LogExerciseRequest {
   exerciseId: number;
-  setsCompleted: number;
-  repsPerSet: string;
-  weightUsed?: number;
   notes?: string;
+  sets: {
+    reps: number;
+    weight: number;
+  }[];
 }
