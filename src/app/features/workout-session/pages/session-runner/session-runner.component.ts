@@ -73,6 +73,7 @@ export class SessionRunnerComponent implements OnInit {
     } else {
       const newForm = this.fb.group({
         exerciseId: [exerciseId],
+        notes: [''],
         sets: this.fb.array([]),
       });
 
@@ -125,9 +126,11 @@ export class SessionRunnerComponent implements OnInit {
     const formValue = this.currentExerciseForm.value;
     const request: LogExerciseRequest = {
       exerciseId: formValue.exerciseId,
-      repsPerSet: formValue.sets.map((s: any) => s.reps).join(','),
-      weightUsed: Math.max(...formValue.sets.map((s: any) => s.weight)),
-      setsCompleted: formValue.sets.length,
+      notes: formValue.notes,
+      sets: formValue.sets.map((s: any) => ({
+        reps: s.reps,
+        weight: s.weight
+      }))
     };
 
     return this.workoutLogService.logExercise(
