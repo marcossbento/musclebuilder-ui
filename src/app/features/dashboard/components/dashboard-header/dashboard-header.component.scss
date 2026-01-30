@@ -15,7 +15,7 @@
 }
 
 ::ng-deep .avatar-button {
-  width: 60px; 
+  width: 60px;
   height: 60px;
   padding: 0.75rem;
   display: flex;
@@ -37,7 +37,7 @@
 
 .user-text-info {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .user-name {
@@ -45,6 +45,7 @@
   font-size: 1.5rem;
   color: var(--text-light);
   margin: 0;
+  text-shadow: 2px 2px 0px #000;
 }
 
 .user-level {
