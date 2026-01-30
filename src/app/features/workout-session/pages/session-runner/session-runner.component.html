@@ -5,7 +5,12 @@
   <div class="hud-header">
     
     <div class="workout-meta-row">
-      <span class="workout-title">{{ workout.name }}</span>
+      <div class="left-meta">
+        <button type="button" class="home-btn" (click)="onExitSession()">
+          <i class="pi pi-home"></i>
+        </button>
+        <span class="workout-title">{{ workout.name }}</span>
+      </div>
       <span class="progress-text">EX {{ currentExerciseIndex + 1 }} / {{ workout.exercises.length }}</span>
     </div>
 
@@ -80,12 +85,6 @@
   <div class="navigation-controls">
     
     <ng-container *ngIf="currentExerciseIndex === 0; else prevBtn">
-      <p-button 
-        label="Sair" 
-        icon="pi pi-times" 
-        styleClass="p-button-text p-button-secondary" 
-        (click)="onExitSession()">
-      </p-button>
     </ng-container>
     
     <ng-template #prevBtn>
@@ -100,7 +99,17 @@
     <div class="right-actions">
         <p-button *ngIf="currentExerciseIndex < workout.exercises.length - 1" label="Próximo" icon="pi pi-arrow-right" iconPos="right" (click)="onNextExercise()"></p-button>
         <p-button *ngIf="currentExerciseIndex === workout.exercises.length - 1" label="Finalizar" icon="pi pi-check" iconPos="right" styleClass="p-button-success" (click)="onCompleteWorkout()" [loading]="isSaving"></p-button>
+  </div>
+</div>
+
+<!-- Modal Overlay -->
+<div class="pixel-modal-overlay" *ngIf="showExitConfirmation">
+  <div class="pixel-modal">
+    <h3 class="font-logo text-warning">Atenção</h3>
+    <p>Deseja sair do treino? Seu progresso atual será perdido.</p>
+    <div class="modal-actions">
+      <button class="pixel-btn-text" (click)="cancelExit()">Cancelar</button>
+      <button class="pixel-btn-filled danger" (click)="confirmExit()">Sair</button>
     </div>
   </div>
-
 </div>

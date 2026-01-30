@@ -32,6 +32,7 @@ export class SessionRunnerComponent implements OnInit {
 
   currentExerciseIndex = 0;
   currentExerciseForm!: FormGroup;
+  showExitConfirmation = false;
 
   private exerciseForms: { [exerciseId: number]: FormGroup } = {};
 
@@ -65,8 +66,6 @@ export class SessionRunnerComponent implements OnInit {
   private setupFormForCurrentExercise(): void {
     const currentExercise = this.workout.exercises[this.currentExerciseIndex];
     const exerciseId = currentExercise.exerciseId;
-
-    console.log('A processar o exercício:', currentExercise);
 
     if (this.exerciseForms[exerciseId]) {
       this.currentExerciseForm = this.exerciseForms[exerciseId];
@@ -203,8 +202,16 @@ export class SessionRunnerComponent implements OnInit {
   }
 
   onExitSession(): void {
-    // TODO: dialog para confirmar
+    this.showExitConfirmation = true;
+  }
+
+  confirmExit(): void {
+    this.showExitConfirmation = false;
     this.router.navigate(['/dashboard']);
+  }
+
+  cancelExit(): void {
+    this.showExitConfirmation = false;
   }
 
   // Ajusta o peso de uma série específica. Delta = valor(determinado no HTML) que é subtraído ou adicionado nos botões [-] e [+].
