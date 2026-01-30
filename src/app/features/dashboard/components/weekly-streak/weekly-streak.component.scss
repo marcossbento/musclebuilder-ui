@@ -1,0 +1,125 @@
+.streak-container {
+    background: var(--surface-dark);
+    border: 2px solid var(--border-color);
+    color: var(--text-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    text-align: left;
+    box-shadow: 4px 4px 0px 0px var(--shadow-color);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px 0px var(--shadow-color);
+        border-color: var(--primary-accent);
+    }
+
+    .streak-header {
+        margin-bottom: 1.5rem;
+
+        h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1rem;
+            color: #fff;
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+        }
+    }
+
+    .days-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.5rem;
+        max-width: 400px;
+        /* Limit width to keep boxes square-ish and compact like image */
+        margin: 0 auto;
+    }
+}
+
+.day-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+
+    .day-label {
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.7rem; // Small pixel font
+        color: #a0a0b0; // Greyish text for future/past
+        text-transform: uppercase;
+    }
+
+    .day-box {
+        width: 100%;
+        aspect-ratio: 1; // Square box
+        background: rgba(80, 20, 80, 0.3); // Dark purple bg
+        border: 2px solid #b04090; // Pink/Magenta border default
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+
+        .check-icon {
+            font-size: 1.2rem;
+            color: #ffcc00; // Gold checkmark
+            filter: drop-shadow(1px 1px 0 #b8860b);
+            display: none; // Hidden by default
+        }
+    }
+
+    // --- STATES ---
+
+    // ACTIVE = Completed Workout
+    &.active {
+        .day-box {
+            background: rgba(120, 30, 100, 0.4);
+            // Keep Pink border for completed? Or maybe purple? 
+            // Ref image shows purple filled box with pink border for checked items.
+        }
+
+        .check-icon {
+            display: block !important; // FORCE DISPLAY
+        }
+    }
+
+    // TODAY (Current Day) - Highlighted Cyan
+    &.today {
+        .day-label {
+            color: #00ffff; // Cyan text
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .day-box {
+            border-color: #00ffff !important; // Cyan border always overrides pink
+            box-shadow: 0 0 10px #00ffff, inset 0 0 5px #00ffff; // Glow
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        // "Today" is usually waiting for workout, so no checkmark yet. 
+        // If user completes workout today, status becomes 'active' (handled by TS logic).
+        // If logic returns 'active' for today (workout done), we might want to keep the cyan glow + checkmark.
+        // We can add a combined selector if needed, but 'active' usually overrides 'today' in TS logic.
+        // Let's check TS: if hasWorkout -> active.
+        // So if today has workout, it loses 'today' class and gets 'active'. 
+        // Ideally, today should ALWAYS be highlighted as today column, even if done.
+        // I should tweak TS or CSS to handle "Today + Active".
+    }
+}
+
+// Adjustments for responsive
+@media (max-width: 400px) {
+    .streak-container .days-container {
+        gap: 0.25rem;
+    }
+
+    .day-column .day-label {
+        font-size: 0.55rem;
+    }
+}

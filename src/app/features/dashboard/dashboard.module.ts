@@ -12,6 +12,7 @@ import { DashboardMissionComponent } from './components/dashboard-mission/dashbo
 import { DashboardNextWorkoutComponent } from './components/dashboard-next-workout/dashboard-next-workout.component';
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { MenuModule } from 'primeng/menu';
+import { WeeklyStreakComponent } from './components/weekly-streak/weekly-streak.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MenuModule } from 'primeng/menu';
     DashboardStatsComponent,
     DashboardMissionComponent,
     DashboardNextWorkoutComponent,
+    WeeklyStreakComponent
   ],
   imports: [
     CommonModule,
