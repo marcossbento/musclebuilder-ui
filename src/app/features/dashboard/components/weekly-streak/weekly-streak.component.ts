@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { WorkoutLogService } from '../../../../core/services/workout-log.service';
-import { map } from 'rxjs';
 
 interface WeekDay {
   date: Date;
@@ -68,6 +67,8 @@ export class WeeklyStreakComponent implements OnInit {
         const workoutDates = new Set();
         
         logs.forEach(log => {
+           if (log.status !== 'COMPLETED') return;
+
            try {
              const d = new Date(log.startedAt);
              const dateStr = this.getLocalDateString(d);

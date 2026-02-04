@@ -35,7 +35,6 @@
         align-items: flex-start;
         gap: 0.5rem;
         max-width: 400px;
-        /* Limit width to keep boxes square-ish and compact like image */
         margin: 0 auto;
     }
 }
@@ -49,16 +48,16 @@
 
     .day-label {
         font-family: 'Press Start 2P', monospace;
-        font-size: 0.7rem; // Small pixel font
-        color: #a0a0b0; // Greyish text for future/past
+        font-size: 0.7rem;
+        color: #a0a0b0;
         text-transform: uppercase;
     }
 
     .day-box {
         width: 100%;
-        aspect-ratio: 1; // Square box
-        background: rgba(80, 20, 80, 0.3); // Dark purple bg
-        border: 2px solid #b04090; // Pink/Magenta border default
+        aspect-ratio: 1;
+        background: rgba(80, 20, 80, 0.3);
+        border: 2px solid #b04090;
         border-radius: 4px;
         display: flex;
         align-items: center;
@@ -68,52 +67,37 @@
 
         .check-icon {
             font-size: 1.2rem;
-            color: #ffcc00; // Gold checkmark
+            color: #ffcc00;
             filter: drop-shadow(1px 1px 0 #b8860b);
-            display: none; // Hidden by default
+            display: none;
         }
     }
 
-    // --- STATES ---
-
-    // ACTIVE = Completed Workout
     &.active {
         .day-box {
             background: rgba(120, 30, 100, 0.4);
-            // Keep Pink border for completed? Or maybe purple? 
-            // Ref image shows purple filled box with pink border for checked items.
         }
 
         .check-icon {
-            display: block !important; // FORCE DISPLAY
+            display: block !important;
         }
     }
 
-    // TODAY (Current Day) - Highlighted Cyan
     &.today {
         .day-label {
-            color: #00ffff; // Cyan text
+            color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
         }
 
         .day-box {
-            border-color: #00ffff !important; // Cyan border always overrides pink
-            box-shadow: 0 0 10px #00ffff, inset 0 0 5px #00ffff; // Glow
+            border-color: #00ffff !important;
+            box-shadow: 0 0 10px #00ffff, inset 0 0 5px #00ffff;
             background: rgba(0, 255, 255, 0.05);
         }
 
-        // "Today" is usually waiting for workout, so no checkmark yet. 
-        // If user completes workout today, status becomes 'active' (handled by TS logic).
-        // If logic returns 'active' for today (workout done), we might want to keep the cyan glow + checkmark.
-        // We can add a combined selector if needed, but 'active' usually overrides 'today' in TS logic.
-        // Let's check TS: if hasWorkout -> active.
-        // So if today has workout, it loses 'today' class and gets 'active'. 
-        // Ideally, today should ALWAYS be highlighted as today column, even if done.
-        // I should tweak TS or CSS to handle "Today + Active".
     }
 }
 
-// Adjustments for responsive
 @media (max-width: 400px) {
     .streak-container .days-container {
         gap: 0.25rem;

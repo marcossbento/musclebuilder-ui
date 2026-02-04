@@ -7,7 +7,6 @@
     <div class="day-column" *ngFor="let day of weekDays" [ngClass]="day.status" [class.today]="day.isToday">
        <div class="day-label">{{ day.label }}</div>
        <div class="day-box">
-          <!-- Active/Completed: Gold Checkmark -->
           <i *ngIf="day.status === 'active'" class="hn hn-check check-icon"></i>
        </div>
     </div>
