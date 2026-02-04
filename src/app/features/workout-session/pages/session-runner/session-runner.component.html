@@ -33,13 +33,13 @@
       </div>
     </div>
   </div>
-  <div class="current-exercise-container" *ngIf="workout.exercises[currentExerciseIndex]">
+   <div class="current-exercise-container" *ngIf="workout.exercises[currentExerciseIndex]">
     <form [formGroup]="currentExerciseForm" class="sets-list">
        <div formArrayName="sets" class="sets-container">
-            <div *ngFor="let set of setsFormArray.controls; let i = index" [formGroupName]="i" class="set-card">
+            <div [formGroupName]="currentSetIndex" class="set-card">
               <div class="set-badge">
                 <span>SÉRIE</span>
-                <span class="number">#{{ i + 1 }}</span>
+                <span class="number">#{{ currentSetIndex + 1 }}/{{ setsFormArray.length }}</span>
               </div>
     
               <div class="controls-wrapper">
@@ -47,9 +47,9 @@
                 <div class="control-group">
                   <label class="pixel-label">KG</label>
                   <div class="stepper-box">
-                    <button type="button" class="pixel-btn-step minus" (click)="adjustWeight(i, -2.5)"><i class="pi pi-minus"></i></button>
+                    <button type="button" class="pixel-btn-step minus" (click)="adjustWeight(currentSetIndex, -2.5)"><i class="pi pi-minus"></i></button>
                     <p-inputNumber formControlName="weight" [min]="0" [maxFractionDigits]="1" [showButtons]="false" styleClass="pixel-input-wrapper" inputStyleClass="pixel-input"></p-inputNumber>
-                    <button type="button" class="pixel-btn-step plus" (click)="adjustWeight(i, 2.5)"><i class="pi pi-plus"></i></button>
+                    <button type="button" class="pixel-btn-step plus" (click)="adjustWeight(currentSetIndex, 2.5)"><i class="pi pi-plus"></i></button>
                   </div>
                 </div>
     
@@ -58,25 +58,26 @@
                 <div class="control-group">
                   <label class="pixel-label">REPS</label>
                   <div class="stepper-box">
-                    <button type="button" class="pixel-btn-step minus" (click)="adjustReps(i, -1)"><i class="pi pi-minus"></i></button>
+                    <button type="button" class="pixel-btn-step minus" (click)="adjustReps(currentSetIndex, -1)"><i class="pi pi-minus"></i></button>
                     <p-inputNumber formControlName="reps" [min]="0" [showButtons]="false" styleClass="pixel-input-wrapper" inputStyleClass="pixel-input"></p-inputNumber>
-                    <button type="button" class="pixel-btn-step plus" (click)="adjustReps(i, 1)"><i class="pi pi-plus"></i></button>
+                    <button type="button" class="pixel-btn-step plus" (click)="adjustReps(currentSetIndex, 1)"><i class="pi pi-plus"></i></button>
                   </div>
                 </div>
     
               </div>
     
               <div class="action-col">
-                <button type="button" class="pixel-btn-icon danger" (click)="removeSet(i)"><i class="pi pi-trash"></i></button>
+                <button type="button" class="pixel-btn-icon danger" (click)="removeSet(currentSetIndex)"><i class="pi pi-trash"></i></button>
               </div>
             </div>
           </div>
     
-          <div class="add-set-container">
+          <div class="add-set-container" *ngIf="isLastSet">
             <p-button label="Nova Série" icon="pi pi-plus" styleClass="p-button-outlined full-width-btn" (click)="addSet()"></p-button>
           </div>
-          <div class="control-group" style="margin-top: 1.5rem;">
-            <label class="pixel-label">NOTAS</label>
+          
+          <div class="control-group" style="margin-top: 1.5rem;" *ngIf="isLastSet">
+            <label class="pixel-label">NOTAS DO EXERCÍCIO</label>
             <textarea formControlName="notes" class="pixel-input" rows="3" style="width: 100%; padding: 0.5rem; resize: none;" placeholder="Adicione notas sobre o exercício..."></textarea>
           </div>
     </form>
@@ -84,21 +85,20 @@
 
   <div class="navigation-controls">
     
-    <ng-container *ngIf="currentExerciseIndex === 0; else prevBtn">
-    </ng-container>
-    
-    <ng-template #prevBtn>
-      <p-button 
+    <p-button 
         label="Anterior" 
         icon="pi pi-arrow-left" 
         styleClass="p-button-outlined p-button-secondary" 
-        (click)="onPreviousExercise()">
-      </p-button>
-    </ng-template>
+        [disabled]="currentExerciseIndex === 0 && currentSetIndex === 0"
+        (click)="onPreviousSet()">
+    </p-button>
 
     <div class="right-actions">
-        <p-button *ngIf="currentExerciseIndex < workout.exercises.length - 1" label="Próximo" icon="pi pi-arrow-right" iconPos="right" (click)="onNextExercise()"></p-button>
-        <p-button *ngIf="currentExerciseIndex === workout.exercises.length - 1" label="Finalizar" icon="pi pi-check" iconPos="right" styleClass="p-button-success" (click)="onCompleteWorkout()" [loading]="isSaving"></p-button>
+        <p-button *ngIf="!isLastSet" label="Próxima Série" icon="pi pi-arrow-right" iconPos="right" (click)="onNextSet()"></p-button>
+        
+        <p-button *ngIf="isLastSet && !isLastSetOfWorkout" label="Próximo Exercício" icon="pi pi-angle-double-right" iconPos="right" styleClass="p-button-info" (click)="onNextExercise()"></p-button>
+        
+        <p-button *ngIf="isLastSetOfWorkout" label="Finalizar" icon="pi pi-check" iconPos="right" styleClass="p-button-success" (click)="onCompleteWorkout()" [loading]="isSaving"></p-button>
   </div>
 </div>
 

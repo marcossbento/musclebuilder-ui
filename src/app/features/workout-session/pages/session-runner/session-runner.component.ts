@@ -31,6 +31,7 @@ export class SessionRunnerComponent implements OnInit {
   activeWorkoutLog!: WorkoutLogResponse;
 
   currentExerciseIndex = 0;
+  currentSetIndex = 0;
   currentExerciseForm!: FormGroup;
   showExitConfirmation = false;
 
@@ -63,9 +64,18 @@ export class SessionRunnerComponent implements OnInit {
     return this.currentExerciseForm.get('sets') as FormArray;
   }
 
+  get isLastSet(): boolean {
+    return this.currentSetIndex === this.setsFormArray.length - 1;
+  }
+
+  get isLastSetOfWorkout(): boolean {
+    return this.isLastSet && this.currentExerciseIndex === this.workout.exercises.length - 1;
+  }
+
   private setupFormForCurrentExercise(): void {
     const currentExercise = this.workout.exercises[this.currentExerciseIndex];
-    const exerciseId = currentExercise.exerciseId;
+    const exerciseId = currentExercise.exerciseId;        
+    this.currentSetIndex = 0; 
 
     if (this.exerciseForms[exerciseId]) {
       this.currentExerciseForm = this.exerciseForms[exerciseId];
@@ -104,10 +114,15 @@ export class SessionRunnerComponent implements OnInit {
       weight: [lastWeight, Validators.required],
     });
     this.setsFormArray.push(setFormGroup);
+    
+    this.currentSetIndex = this.setsFormArray.length - 1;
   }
 
   removeSet(index: number): void {
     this.setsFormArray.removeAt(index);
+    if (this.currentSetIndex >= index && this.currentSetIndex > 0) {
+        this.currentSetIndex--;
+    }
   }
 
   //Método que salva o progresso do exercício atual
@@ -138,6 +153,15 @@ export class SessionRunnerComponent implements OnInit {
     );
   }
 
+  onNextSet(): void {
+    
+    if (this.currentSetIndex < this.setsFormArray.length - 1) {
+        this.currentSetIndex++;
+    } else {
+        this.onNextExercise(); 
+    }
+  }
+
   // Lógica de navegação
   onNextExercise(): void {
     this.logCurrentExercise().subscribe({
@@ -152,6 +176,14 @@ export class SessionRunnerComponent implements OnInit {
         this.isSaving = false;
       },
     });
+  }
+  
+  onPreviousSet(): void {
+    if (this.currentSetIndex > 0) {
+        this.currentSetIndex--;
+    } else {
+        this.onPreviousExercise();
+    }
   }
 
   onPreviousExercise(): void {
@@ -238,10 +270,16 @@ export class SessionRunnerComponent implements OnInit {
     }
   }
 
-  // Calcula a % da barra de progresso
   get progressPercentage(): number {
     if (!this.workout || !this.workout.exercises) return 0;
-    // +1 já que o index começa em 0, mas visualmente a ideia é já haver progresso desde o início
-    return ((this.currentExerciseIndex + 1) / this.workout.exercises.length) * 100;
+    
+    const baseProgress = (this.currentExerciseIndex / this.workout.exercises.length) * 100;
+    
+    const currentTotalSets = this.setsFormArray.length || 1;
+    const setFraction = (this.currentSetIndex) / currentTotalSets;
+    
+    const exerciseWeight = 100 / this.workout.exercises.length;
+    
+    return baseProgress + (setFraction * exerciseWeight);
   }
 }
