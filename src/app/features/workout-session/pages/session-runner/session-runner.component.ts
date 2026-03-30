@@ -18,12 +18,12 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService],
 })
 export class SessionRunnerComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private workoutService = inject(WorkoutService);
-  private workoutLogService = inject(WorkoutLogService);
-  private fb = inject(FormBuilder);
-  private messageService = inject(MessageService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly workoutService = inject(WorkoutService);
+  private readonly workoutLogService = inject(WorkoutLogService);
+  private readonly fb = inject(FormBuilder);
+  private readonly messageService = inject(MessageService);
 
   isLoading = true;
   isSaving = false;
@@ -72,10 +72,18 @@ export class SessionRunnerComponent implements OnInit {
     return this.isLastSet && this.currentExerciseIndex === this.workout.exercises.length - 1;
   }
 
+  currentLastPerformance: any = undefined;
+
   private setupFormForCurrentExercise(): void {
     const currentExercise = this.workout.exercises[this.currentExerciseIndex];
     const exerciseId = currentExercise.exerciseId;        
     this.currentSetIndex = 0; 
+    this.currentLastPerformance = undefined;
+
+    this.workoutLogService.getLastPerformance(exerciseId).subscribe({
+      next: (perf) => this.currentLastPerformance = perf,
+      error: () => this.currentLastPerformance = undefined
+    });
 
     if (this.exerciseForms[exerciseId]) {
       this.currentExerciseForm = this.exerciseForms[exerciseId];
@@ -223,7 +231,9 @@ export class SessionRunnerComponent implements OnInit {
           }
 
           setTimeout(() => {
-            this.router.navigate(['/session', response.workoutLog.id, 'summary']);
+            this.router.navigate(['/session', response.workoutLog.id, 'summary'], {
+              state: { newlyAwardedAchievements: response.newlyAwardedAchievements }
+            });
           }, 1500);
         },
         error: (err) => {

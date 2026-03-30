@@ -31,5 +31,9 @@ export class WorkoutLogService {
     return this.http.get<WorkoutLogResponse[]>(this.API_URL);
   }
 
+  getLastPerformance(exerciseId: number): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/exercises/${exerciseId}/last-performance`);
+  }
+
   constructor() { }
 }
