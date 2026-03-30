@@ -51,3 +51,17 @@
     </div>
   </div>
 </div>
+
+<!-- PR Celebration Modal -->
+<p-dialog [(visible)]="showPRModal" [modal]="true" [closable]="true" styleClass="pr-dialog" [style]="{width: '90vw', maxWidth: '400px'}" [showHeader]="false">
+  <div class="pr-modal-container">
+    <div class="pr-badge-wrapper">
+      <img src="assets/badges/badge_PersonalRecord.png" alt="Recorde Pessoal" class="pr-badge" />
+    </div>
+    <h3 class="font-logo pr-title">Você quebrou seu recorde pessoal de carga!</h3>
+    <p class="pr-subtitle">Excelente trabalho! Continue superando seus limites.</p>
+    <div class="pr-action">
+      <button pButton label="Incrível!" class="p-button-success full-width-btn pixel-btn" (click)="closePRModal()"></button>
+    </div>
+  </div>
+</p-dialog>

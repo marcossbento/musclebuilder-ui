@@ -14,6 +14,7 @@ import { ToastModule } from "primeng/toast";
 import { SessionSummaryComponent } from './pages/session-summary/session-summary.component';
 import { DividerModule } from 'primeng/divider'
 import { ScrollPanelModule } from 'primeng/scrollpanel'
+import { DialogModule } from 'primeng/dialog'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel'
     InputNumberModule,
     ToastModule,
     DividerModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    DialogModule
 ]
 })
 export class WorkoutSessionModule { }
