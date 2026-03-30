@@ -18,11 +18,30 @@ $primary-glow: 0 0 2px var(--primary-accent);
   }
 }
 
+.pixel-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #000;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.pixel-subtitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: var(--primary-accent);
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #000;
+  line-height: 1.4;
+}
+
 .cta-text {
-  h2 {
-    font-size: 1.5rem;
-    color: var(--primary-accent);
-  }
   p {
     color: var(--text-muted);
   }

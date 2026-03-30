@@ -1,7 +1,7 @@
 <div *ngIf="workout; else noWorkouts" class="cta-card" [routerLink]="['/session', workout.id]">
   <div class="cta-text">
-    <span>Próximo Treino</span>
-    <h2>{{ workout.name }}</h2>
+    <span class="pixel-title">Próximo Treino</span>
+    <h2 class="pixel-subtitle">{{ workout.name }}</h2>
     <div class="workout-details">
       <span><i class="hn hn-bullet-list-solid"></i> {{ (workout.exerciseCount|| 0) }} exercícios</span>
       <span><i class="hn hn-star-solid"></i> +{{ workout.estimatedXp }} XP</span>
