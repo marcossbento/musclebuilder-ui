@@ -11,6 +11,12 @@ export interface ExerciseLogSetResponse {
   orderIndex: number;
 }
 
+export interface LastPerformanceDTO {
+  maxWeight: number;
+  totalReps: number;
+  date: string;
+}
+
 export interface ExerciseLogResponse {
   id: number;
   exerciseName: string;
@@ -20,6 +26,7 @@ export interface ExerciseLogResponse {
   targetSets?: number;
   targetReps?: number;
   sets: ExerciseLogSetResponse[];
+  lastPerformance?: LastPerformanceDTO;
 }
 
 export interface WorkoutLogResponse {
